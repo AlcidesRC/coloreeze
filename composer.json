@@ -3,7 +3,7 @@
     "type": "library",
     "license": "Unlicense",
     "description": "Color handling and manipulation library with support for Laravel integration",
-    "keywords": ["color", "rgba", "hex", "php", "laravel"],
+    "keywords": ["color", "rgba", "hex", "cmyk", "cielab", "xyz", "hsb", "hsv", "hsl", "conversion", "color spaces"],
     "authors": [
         {
             "name": "Alcides Ramos",
@@ -64,5 +64,8 @@
                 "Coloreeze": "Intervention\\Coloreeze\\Facades\\Coloreeze"
             }
         }
+    },
+    "scripts": {
+        "tests": "vendor/bin/phpunit --coverage-text --coverage-xml=./.reports/coverage/xml --coverage-html=./.reports/coverage/html --log-junit=./.reports/coverage/junit.xml --coverage-cache .cache/coverage"
     }
 }
