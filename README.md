@@ -50,6 +50,162 @@ $ composer require fonil/coloreeze
 - ColorRGBA
 - ColorXYZ
 
+### Color Factory
+
+#### ColorFactory::fromString(string $input): Color
+
+The `ColorFactory` class allows you to create a color instance from any valid input string.
+
+If the input string is not a valid color representation it throws an `InvalidInput` exception.
+
+```php
+ColorFactory::fromString('rgb(0,100,200)'); // Returns a `ColorRGBA` instance
+ColorFactory::fromString('#336699'); // Returns a `ColorHex` instance
+ColorFactory::fromString('unknown(1,2,3)'); // Throws an `InvalidInput` exception
+```
+
+### Color Interface
+
+#### __toString(): string
+
+Cast the color value to a string:
+
+```php
+echo ColorRGBA::fromString('rgba(0,100,200,1.0)');
+echo ColorHex::fromString('#336699');
+
+'rgba(0,100,200,1.0)'
+'#336699'
+```
+
+#### fromString(string $input): Color
+
+Parses an input string and returns accordingly the related `Color` implementation:
+
+```php
+$hex = ColorHex::fromString('#336699');
+$rgba = ColorRGBA::fromString('rgba(0,100,200,1.0)');
+...
+```
+
+It throws an `InvalidInput` exception in case of the string is not well formed or unsupported color.
+
+#### getValue(): mixed
+
+Returns the `Color` value. On single-value colors, this method returns a primitive value (int or string) but on composite ones it returns an array with color's components:
+
+```php
+$int = ColorInt::fromString('int(100)');
+var_dump($int->getValue());
+
+int(100)
+```
+
+```php
+$rgba = ColorRGBA::fromString('rgba(0, 100, 200)');
+var_dump($int->getValue());
+
+array(3) {
+  [0]=>
+  int(0)
+  [1]=>
+  int(100)
+  [2]=>
+  int(200)
+}
+```
+
+```php
+$hex = ColorHex::fromString('#336699');
+var_dump($int->getValue());
+
+string(7) "#336699"
+```
+
+#### toCIELab(): ColorCIELab
+
+Converts a color to a **CIELab**:
+
+```php
+$lab = ColorHex::fromString('#336699')->toCIELab();
+```
+
+#### toCMYK(): ColorCMYK
+
+Converts a color to a **CMYK**:
+
+```php
+$cmyk = ColorHex::fromString('#336699')->toCMYK();
+```
+
+#### toHex(): ColorHex
+
+Converts a color to a **Hex**:
+
+```php
+$hex = ColorRGBA::fromString('rgba(100,200,200,1.0)')->toHex();
+```
+
+#### toHSB(): ColorHSB
+
+Converts a color to a **HSB/HSV**:
+
+```php
+$hsb = ColorHex::fromString('#336699')->toHSB();
+```
+#### toHSL(): ColorHSL
+
+Converts a color to a **HSL**:
+
+```php
+$hsl = ColorHex::fromString('#336699')->toHSL();
+```
+
+#### toInt(): ColorInt
+
+Converts a color to an **Int**:
+
+```php
+$int = ColorHex::fromString('#336699')->toInt();
+```
+
+#### toRGBA(): ColorRGBA
+
+```php
+$rgba = ColorInt::fromString('int(255)')->toRGBA();
+```
+
+#### toXYZ(): ColorXYZ
+
+```php
+$rgba = ColorCMYK::fromString('cmyk(0,0,0,0)')->toXYZ();
+```
+
+#### toComplementary(): Color
+
+```php
+$complementary = ColorRGBA::fromString('hsl(182,25,50)')->toComplementary();
+```
+
+#### toGreyscale(): Color
+
+```php
+$greyscale = ColorInt::fromString('int(4278255615)')->toGreyscale();
+```
+
+#### adjustBrightness(int $steps): Color
+
+```php
+$dark = ColorInt::fromString('int(4278255615)')->adjustBrightness(-10);
+$light = ColorInt::fromString('int(4278255615)')->adjustBrightness(10);
+```
+
+#### distanceCIE76(Color $color): float
+
+```php
+$distance = ColorInt::fromString('int(4278255615)')->distanceCIE76(ColorInt::fromString('int(0)'));
+```
+
 ## Testing
 
 You can run the test suite via composer:
@@ -141,8 +297,8 @@ This command generates the following summary:
 
 [2022-07-22 08:20:20] `/code`
 
-                99.0%                  89.5%                  94.1%                  100 %                
-                Code                 Complexity            Architecture              Style                
+                99.0%                  89.5%                  94.1%                  100 %
+                Code                 Complexity            Architecture              Style
 
 Score scale: ◼ 1-49 ◼ 50-79 ◼ 80-100
 
