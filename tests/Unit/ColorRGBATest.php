@@ -93,6 +93,8 @@ final class ColorRGBATest extends TestCase
     //-----------------------------------------------------------------------------------------------------------------
 
     /**
+     * @param array<int, array<int, array<int, float|int>|string>> $expectedValue
+     *
      * @covers \Fonil\Coloreeze\ColorRGBA::__construct
      * @covers \Fonil\Coloreeze\ColorRGBA::fromString
      * @covers \Fonil\Coloreeze\ColorRGBA::getValue
@@ -111,7 +113,7 @@ final class ColorRGBATest extends TestCase
     }
 
     /**
-     * @return array<int, array<int, string|array>>
+     * @return array<int, array<int, array<int, float|int>|string>>
      */
     public function dataProviderForFromString(): array
     {

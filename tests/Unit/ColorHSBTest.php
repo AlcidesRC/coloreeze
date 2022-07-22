@@ -91,6 +91,8 @@ final class ColorHSBTest extends TestCase
     //-----------------------------------------------------------------------------------------------------------------
 
     /**
+     * @param array<int, array<int, array<int, float>|string>> $expectedValue
+     *
      * @covers \Fonil\Coloreeze\ColorHSB::__construct
      * @covers \Fonil\Coloreeze\ColorHSB::fromString
      * @covers \Fonil\Coloreeze\ColorHSB::getValue
@@ -109,7 +111,7 @@ final class ColorHSBTest extends TestCase
     }
 
     /**
-     * @return array<int, array<int, string|array>>
+     * @return array<int, array<int, array<int, float>|string>>
      */
     public function dataProviderForFromString(): array
     {

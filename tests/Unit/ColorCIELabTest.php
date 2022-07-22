@@ -87,6 +87,8 @@ final class ColorCIELabTest extends TestCase
     //-----------------------------------------------------------------------------------------------------------------
 
     /**
+     * @param array<int, array<int, array<int, float>|string>> $expectedValue
+     *
      * @covers \Fonil\Coloreeze\ColorCIELab::__construct
      * @covers \Fonil\Coloreeze\ColorCIELab::fromString
      * @covers \Fonil\Coloreeze\ColorCIELab::getValue
@@ -105,7 +107,7 @@ final class ColorCIELabTest extends TestCase
     }
 
     /**
-     * @return array<int, array<int, string|array>>
+     * @return array<int, array<int, array<int, float>|string>>
      */
     public function dataProviderForFromString(): array
     {

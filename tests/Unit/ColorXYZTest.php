@@ -38,7 +38,7 @@ final class ColorXYZTest extends TestCase
     }
 
     /**
-     * @return array<int, array<int, int>>
+     * @return array<int, array<int, float|int>>
      */
     public function dataProviderForValidation(): array
     {
@@ -91,6 +91,8 @@ final class ColorXYZTest extends TestCase
     //-----------------------------------------------------------------------------------------------------------------
 
     /**
+     * @param array<int, array<int, array<int, float>|string>> $expectedValue
+     *
      * @covers \Fonil\Coloreeze\ColorXYZ::__construct
      * @covers \Fonil\Coloreeze\ColorXYZ::fromString
      * @covers \Fonil\Coloreeze\ColorXYZ::getValue
@@ -109,7 +111,7 @@ final class ColorXYZTest extends TestCase
     }
 
     /**
-     * @return array<int, array<int, string|array>>
+     * @return array<int, array<int, array<int, float>|string>>
      */
     public function dataProviderForFromString(): array
     {

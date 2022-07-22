@@ -98,7 +98,7 @@ final class ColorIntTest extends TestCase
     }
 
     /**
-     * @return array<int, array<int, string|null>>
+     * @return array<int, array<int, int|string>>
      */
     public function dataProviderForFromString(): array
     {

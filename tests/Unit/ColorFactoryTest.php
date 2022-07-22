@@ -93,7 +93,7 @@ final class ColorFactoryTest extends TestCase
     {
         $sut = ColorFactory::fromString($input);
 
-        static::assertInstanceOf($expectedClass, $sut);
+        static::assertSame($expectedClass, get_class($sut));
     }
 
     /**
