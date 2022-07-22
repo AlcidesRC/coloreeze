@@ -8,12 +8,12 @@ use Fonil\Coloreeze\Interfaces\Color as ColorInterface;
 
 final class ColorHSL extends Color implements ColorInterface
 {
-    public const VALUE_MIN__HUE = 0;
     public const VALUE_MAX__HUE = 360;
-    public const VALUE_MIN__LIGHTNESS = 0;
     public const VALUE_MAX__LIGHTNESS = 100;
-    public const VALUE_MIN__SATURATION = 0;
     public const VALUE_MAX__SATURATION = 100;
+    public const VALUE_MIN__HUE = 0;
+    public const VALUE_MIN__LIGHTNESS = 0;
+    public const VALUE_MIN__SATURATION = 0;
 
     public function __construct(
         private readonly float $hue,
@@ -51,18 +51,23 @@ final class ColorHSL extends Color implements ColorInterface
         return "hsl({$h},{$s}%,{$l}%)";
     }
 
+    public function adjustBrightness(int $steps = 1): ColorHSL
+    {
+        return $this->toRGBA()->adjustBrightness($steps)->toHSL();
+    }
+
+    public function distanceCIE76(ColorInterface $color): float
+    {
+        return $this->toCIELab()->distanceCIE76($color->toCIELab());
+    }
+
     public static function fromString(string $value): ColorHSL
     {
         self::validateFormat($value, self::class);
 
-        preg_match(self::MAP_REGEXP[__CLASS__], $value, $matches);
+        preg_match(self::MAP_REGEXP[self::class], $value, $matches);
 
         return new static((float) $matches[1], (float) $matches[2], (float) $matches[3]);
-    }
-
-    public function adjustBrightness(int $steps = 1): ColorHSL
-    {
-        return $this->toRGBA()->adjustBrightness($steps)->toHSL();
     }
 
     public function getValue(): mixed
@@ -172,10 +177,5 @@ final class ColorHSL extends Color implements ColorInterface
     public function toXYZ(): ColorXYZ
     {
         return $this->toRGBA()->toXYZ();
-    }
-
-    public function distanceCIE76(ColorInterface $color): float
-    {
-        return $this->toCIELab()->distanceCIE76($color->toCIELab());
     }
 }

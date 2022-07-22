@@ -30,18 +30,23 @@ final class ColorInt extends Color implements ColorInterface
         );
     }
 
+    public function adjustBrightness(int $steps = 1): ColorInt
+    {
+        return $this->toRGBA()->adjustBrightness($steps)->toInt();
+    }
+
+    public function distanceCIE76(ColorInterface $color): float
+    {
+        return $this->toCIELab()->distanceCIE76($color->toCIELab());
+    }
+
     public static function fromString(string $value): ColorInt
     {
         self::validateFormat($value, self::class);
 
-        preg_match(self::MAP_REGEXP[__CLASS__], $value, $matches);
+        preg_match(self::MAP_REGEXP[self::class], $value, $matches);
 
         return new static((int) $matches[1]);
-    }
-
-    public function adjustBrightness(int $steps = 1): ColorInt
-    {
-        return $this->toRGBA()->adjustBrightness($steps)->toInt();
     }
 
     public function getValue(): mixed
@@ -99,10 +104,5 @@ final class ColorInt extends Color implements ColorInterface
     public function toXYZ(): ColorXYZ
     {
         return $this->toRGBA()->toXYZ();
-    }
-
-    public function distanceCIE76(ColorInterface $color): float
-    {
-        return $this->toCIELab()->distanceCIE76($color->toCIELab());
     }
 }

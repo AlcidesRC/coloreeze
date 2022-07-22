@@ -17,11 +17,11 @@ interface Color
 {
     public function __toString(): string;
 
-    public static function fromString(string $input): Color;
-
     public function adjustBrightness(int $percentage = 10): Color;
 
     public function distanceCIE76(Color $color): float;
+
+    public static function fromString(string $input): Color;
 
     public function getValue(): mixed;
 

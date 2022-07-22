@@ -8,12 +8,12 @@ use Fonil\Coloreeze\Interfaces\Color as ColorInterface;
 
 final class ColorXYZ extends Color implements ColorInterface
 {
-    public const VALUE_MIN__X = 0;
     public const VALUE_MAX__X = 95.047;
-    public const VALUE_MIN__Y = 0;
     public const VALUE_MAX__Y = 100;
-    public const VALUE_MIN__Z = 0;
     public const VALUE_MAX__Z = 108.883;
+    public const VALUE_MIN__X = 0;
+    public const VALUE_MIN__Y = 0;
+    public const VALUE_MIN__Z = 0;
 
     public function __construct(
         private readonly float $x,
@@ -51,18 +51,23 @@ final class ColorXYZ extends Color implements ColorInterface
         return "xyz({$x},{$y},{$z})";
     }
 
+    public function adjustBrightness(int $steps = 1): ColorXYZ
+    {
+        return $this->toRGBA()->adjustBrightness($steps)->toXYZ();
+    }
+
+    public function distanceCIE76(ColorInterface $color): float
+    {
+        return $this->toCIELab()->distanceCIE76($color->toCIELab());
+    }
+
     public static function fromString(string $value): ColorXYZ
     {
         self::validateFormat($value, self::class);
 
-        preg_match(self::MAP_REGEXP[__CLASS__], $value, $matches);
+        preg_match(self::MAP_REGEXP[self::class], $value, $matches);
 
         return new static((float) $matches[1], (float) $matches[2], (float) $matches[3]);
-    }
-
-    public function adjustBrightness(int $steps = 1): ColorXYZ
-    {
-        return $this->toRGBA()->adjustBrightness($steps)->toXYZ();
     }
 
     public function getValue(): mixed
@@ -165,10 +170,5 @@ final class ColorXYZ extends Color implements ColorInterface
     public function toXYZ(): ColorXYZ
     {
         return $this;
-    }
-
-    public function distanceCIE76(ColorInterface $color): float
-    {
-        return $this->toCIELab()->distanceCIE76($color->toCIELab());
     }
 }

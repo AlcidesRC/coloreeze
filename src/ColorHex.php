@@ -11,12 +11,12 @@ final class ColorHex extends Color implements ColorInterface
     private const DASH = '#';
     private const DEFAULT__ALPHA = 'FF';
 
-    private readonly string $value;
-
     /**
      * @var array<string, int>
      */
     private readonly array $channels;
+
+    private readonly string $value;
 
     public function __construct(string $value)
     {
@@ -24,7 +24,7 @@ final class ColorHex extends Color implements ColorInterface
 
         $value = strtoupper(ltrim($value, self::DASH));
 
-        $this->value = match(strlen($value)) {
+        $this->value = match (strlen($value)) {
             6       => $value . self::DEFAULT__ALPHA,
             default => $value,
         };
@@ -47,18 +47,23 @@ final class ColorHex extends Color implements ColorInterface
         return self::DASH . $this->value;
     }
 
+    public function adjustBrightness(int $steps = 1): ColorHex
+    {
+        return $this->toRGBA()->adjustBrightness($steps)->toHex();
+    }
+
+    public function distanceCIE76(ColorInterface $color): float
+    {
+        return $this->toCIELab()->distanceCIE76($color->toCIELab());
+    }
+
     public static function fromString(string $value): ColorHex
     {
         self::validateFormat($value, self::class);
 
-        preg_match(self::MAP_REGEXP[__CLASS__], $value, $matches);
+        preg_match(self::MAP_REGEXP[self::class], $value, $matches);
 
         return new static((string) $matches[1]);
-    }
-
-    public function adjustBrightness(int $steps = 1): ColorHex
-    {
-        return $this->toRGBA()->adjustBrightness($steps)->toHex();
     }
 
     public function getValue(): mixed
@@ -138,10 +143,5 @@ final class ColorHex extends Color implements ColorInterface
     public function toXYZ(): ColorXYZ
     {
         return $this->toRGBA()->toXYZ();
-    }
-
-    public function distanceCIE76(ColorInterface $color): float
-    {
-        return $this->toCIELab()->distanceCIE76($color->toCIELab());
     }
 }

@@ -8,12 +8,12 @@ use Fonil\Coloreeze\Interfaces\Color as ColorInterface;
 
 final class ColorCIELab extends Color implements ColorInterface
 {
-    public const VALUE_MIN__L = 0;
+    public const VALUE_MAX__A = 128;
+    public const VALUE_MAX__B = 128;
     public const VALUE_MAX__L = 100;
     public const VALUE_MIN__A = -128;
-    public const VALUE_MAX__A = 128;
     public const VALUE_MIN__B = -128;
-    public const VALUE_MAX__B = 128;
+    public const VALUE_MIN__L = 0;
 
     public function __construct(
         private readonly float $l,
@@ -51,18 +51,38 @@ final class ColorCIELab extends Color implements ColorInterface
         return "CIELab({$l},{$a},{$b})";
     }
 
+    public function adjustBrightness(int $steps = 1): ColorCIELab
+    {
+        return $this->toRGBA()->adjustBrightness($steps)->toCIELab();
+    }
+
+    public function distanceCIE76(ColorInterface $color): float
+    {
+        if (strval($this) === strval($color)) {
+            return 0;
+        }
+
+        $sum = 0;
+
+        // @phpstan-ignore-next-line
+        $sum += pow($this->l - $color->l, 2);
+
+        // @phpstan-ignore-next-line
+        $sum += pow($this->a - $color->a, 2);
+
+        // @phpstan-ignore-next-line
+        $sum += pow($this->b - $color->b, 2);
+
+        return round(sqrt($sum), self::PRECISSION);
+    }
+
     public static function fromString(string $value): ColorCIELab
     {
         self::validateFormat($value, self::class);
 
-        preg_match(self::MAP_REGEXP[__CLASS__], $value, $matches);
+        preg_match(self::MAP_REGEXP[self::class], $value, $matches);
 
         return new static((float) $matches[1], (float) $matches[2], (float) $matches[3]);
-    }
-
-    public function adjustBrightness(int $steps = 1): ColorCIELab
-    {
-        return $this->toRGBA()->adjustBrightness($steps)->toCIELab();
     }
 
     public function getValue(): mixed
@@ -158,25 +178,5 @@ final class ColorCIELab extends Color implements ColorInterface
         */
 
         return new ColorXYZ($x, $y, $z);
-    }
-
-    public function distanceCIE76(ColorInterface $color): float
-    {
-        if (strval($this) === strval($color)) {
-            return 0;
-        }
-
-        $sum = 0;
-
-        // @phpstan-ignore-next-line
-        $sum += pow($this->l - $color->l, 2);
-
-        // @phpstan-ignore-next-line
-        $sum += pow($this->a - $color->a, 2);
-
-        // @phpstan-ignore-next-line
-        $sum += pow($this->b - $color->b, 2);
-
-        return round(sqrt($sum), self::PRECISSION);
     }
 }

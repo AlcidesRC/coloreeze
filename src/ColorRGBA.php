@@ -8,14 +8,14 @@ use Fonil\Coloreeze\Interfaces\Color as ColorInterface;
 
 final class ColorRGBA extends Color implements ColorInterface
 {
-    public const VALUE_MIN__RED = 0;
-    public const VALUE_MAX__RED = 255;
-    public const VALUE_MIN__GREEN = 0;
-    public const VALUE_MAX__GREEN = 255;
-    public const VALUE_MIN__BLUE = 0;
-    public const VALUE_MAX__BLUE = 255;
-    public const VALUE_MIN__ALPHA = 0;
     public const VALUE_MAX__ALPHA = 1;
+    public const VALUE_MAX__BLUE = 255;
+    public const VALUE_MAX__GREEN = 255;
+    public const VALUE_MAX__RED = 255;
+    public const VALUE_MIN__ALPHA = 0;
+    public const VALUE_MIN__BLUE = 0;
+    public const VALUE_MIN__GREEN = 0;
+    public const VALUE_MIN__RED = 0;
 
     public function __construct(
         private readonly int $red,
@@ -62,15 +62,6 @@ final class ColorRGBA extends Color implements ColorInterface
         return "rgba({$r},{$g},{$b},{$a})";
     }
 
-    public static function fromString(string $value): ColorRGBA
-    {
-        self::validateFormat($value, self::class);
-
-        preg_match(self::MAP_REGEXP[__CLASS__], $value, $matches);
-
-        return new static((int) $matches[1], (int) $matches[2], (int) $matches[3], (float) ($matches[4] ?? 1));
-    }
-
     public function adjustBrightness(int $steps = 1): ColorRGBA
     {
         $r = max(0, min(255, $this->red + $steps));
@@ -78,6 +69,20 @@ final class ColorRGBA extends Color implements ColorInterface
         $b = max(0, min(255, $this->blue + $steps));
 
         return new ColorRGBA($r, $g, $b);
+    }
+
+    public function distanceCIE76(ColorInterface $color): float
+    {
+        return $this->toCIELab()->distanceCIE76($color->toCIELab());
+    }
+
+    public static function fromString(string $value): ColorRGBA
+    {
+        self::validateFormat($value, self::class);
+
+        preg_match(self::MAP_REGEXP[self::class], $value, $matches);
+
+        return new static((int) $matches[1], (int) $matches[2], (int) $matches[3], (float) ($matches[4] ?? 1));
     }
 
     public function getValue(): mixed
@@ -280,10 +285,5 @@ final class ColorRGBA extends Color implements ColorInterface
         }
 
         return new ColorXYZ($x, $y, $z);
-    }
-
-    public function distanceCIE76(ColorInterface $color): float
-    {
-        return $this->toCIELab()->distanceCIE76($color->toCIELab());
     }
 }

@@ -8,14 +8,14 @@ use Fonil\Coloreeze\Interfaces\Color as ColorInterface;
 
 final class ColorCMYK extends Color implements ColorInterface
 {
-    public const VALUE_MIN__CYAN = 0;
     public const VALUE_MAX__CYAN = 1;
-    public const VALUE_MIN__MAGENTA = 0;
-    public const VALUE_MAX__MAGENTA = 1;
-    public const VALUE_MIN__YELLOW = 0;
-    public const VALUE_MAX__YELLOW = 1;
-    public const VALUE_MIN__KEY = 0;
     public const VALUE_MAX__KEY = 1;
+    public const VALUE_MAX__MAGENTA = 1;
+    public const VALUE_MAX__YELLOW = 1;
+    public const VALUE_MIN__CYAN = 0;
+    public const VALUE_MIN__KEY = 0;
+    public const VALUE_MIN__MAGENTA = 0;
+    public const VALUE_MIN__YELLOW = 0;
 
     public function __construct(
         private readonly float $cyan,
@@ -62,18 +62,23 @@ final class ColorCMYK extends Color implements ColorInterface
         return "cmyk({$c},{$m}%,{$y}%,{$k}%)";
     }
 
+    public function adjustBrightness(int $steps = 1): ColorCMYK
+    {
+        return $this->toRGBA()->adjustBrightness($steps)->toCMYK();
+    }
+
+    public function distanceCIE76(ColorInterface $color): float
+    {
+        return $this->toCIELab()->distanceCIE76($color->toCIELab());
+    }
+
     public static function fromString(string $value): ColorCMYK
     {
         self::validateFormat($value, self::class);
 
-        preg_match(self::MAP_REGEXP[__CLASS__], $value, $matches);
+        preg_match(self::MAP_REGEXP[self::class], $value, $matches);
 
         return new static((float) $matches[1], (float) $matches[2], (float) $matches[3], (float) $matches[4]);
-    }
-
-    public function adjustBrightness(int $steps = 1): ColorCMYK
-    {
-        return $this->toRGBA()->adjustBrightness($steps)->toCMYK();
     }
 
     public function getValue(): mixed
@@ -137,10 +142,5 @@ final class ColorCMYK extends Color implements ColorInterface
     public function toXYZ(): ColorXYZ
     {
         return $this->toRGBA()->toXYZ();
-    }
-
-    public function distanceCIE76(ColorInterface $color): float
-    {
-        return $this->toCIELab()->distanceCIE76($color->toCIELab());
     }
 }
