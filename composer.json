@@ -66,7 +66,9 @@
         }
     },
     "scripts": {
-        "tests": "vendor/bin/phpunit --coverage-text --coverage-xml=./.reports/coverage/xml --coverage-html=./.reports/coverage/html --log-junit=./.reports/coverage/junit.xml --coverage-cache .cache/coverage",
-        "phpstan": "vendor/bin/phpstan analyse --level 9 --memory-limit 1G --ansi ./src ./tests"
+        "linter": "./vendor/bin/parallel-lint -e php -j 10 --colors ./src ./tests",
+        "phpinsights": "./vendor/bin/phpinsights --fix",
+        "phpstan": "vendor/bin/phpstan analyse --level 9 --memory-limit 1G --ansi ./src ./tests",
+        "tests": "vendor/bin/phpunit --coverage-text --coverage-xml=./.reports/coverage/xml --coverage-html=./.reports/coverage/html --log-junit=./.reports/coverage/junit.xml --coverage-cache .cache/coverage"
     }
 }
