@@ -17,9 +17,9 @@ interface Color
 {
     public function __toString(): string;
 
-    public static function fromString(string $input): mixed;
+    public static function fromString(string $input): Color;
 
-    public function adjustBrightness(int $percentage = 10): mixed;
+    public function adjustBrightness(int $percentage = 10): Color;
 
     public function distanceCIE76(Color $color): float;
 
@@ -29,9 +29,9 @@ interface Color
 
     public function toCMYK(): ColorCMYK;
 
-    public function toComplementary(): mixed;
+    public function toComplementary(): Color;
 
-    public function toGreyscale(): mixed;
+    public function toGreyscale(): Color;
 
     public function toHex(): ColorHex;
 
