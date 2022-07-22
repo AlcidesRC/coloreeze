@@ -12,6 +12,10 @@ final class ColorHex extends Color implements ColorInterface
     private const DEFAULT__ALPHA = 'FF';
 
     private readonly string $value;
+
+    /**
+     * @var array<string, int>
+     */
     private readonly array $channels;
 
     public function __construct(string $value)

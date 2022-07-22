@@ -167,8 +167,14 @@ final class ColorCIELab extends Color implements ColorInterface
         }
 
         $sum = 0;
+
+        // @phpstan-ignore-next-line
         $sum += pow($this->l - $color->l, 2);
+
+        // @phpstan-ignore-next-line
         $sum += pow($this->a - $color->a, 2);
+
+        // @phpstan-ignore-next-line
         $sum += pow($this->b - $color->b, 2);
 
         return round(sqrt($sum), self::PRECISSION);
