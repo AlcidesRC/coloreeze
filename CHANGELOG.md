@@ -8,7 +8,7 @@ All notable changes of the `coloreeze` release series are documented in this fil
 
 - Updated CHANGELOG.md
 
-**Full Changelog**: https://github.com/fonil/coloreeze/compare/v1.0.1...v1.0.2
+**Full Changelog**: https://github.com/alcidesrc/coloreeze/compare/v1.0.1...v1.0.2
 
 ## v1.0.1 - 2020-07-22
 
@@ -19,7 +19,7 @@ All notable changes of the `coloreeze` release series are documented in this fil
 - Minor fixes detected by PHPInsights
 - Added custom scripts to composer.json
 
-**Full Changelog:** https://github.com/fonil/coloreeze/compare/v1.0.0...v1.0.1
+**Full Changelog:** https://github.com/alcidesrc/coloreeze/compare/v1.0.0...v1.0.1
 
 ## v1.0.0 - 2020-07-21
 
