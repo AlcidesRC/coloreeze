@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fonil\Coloreeze\Exceptions;
+namespace Coloreeze\Exceptions;
 
 use Exception;
 

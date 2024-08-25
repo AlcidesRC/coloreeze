@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Fonil\Coloreeze;
+namespace Coloreeze;
 
-use Fonil\Coloreeze\Exceptions\InvalidInput;
-use Fonil\Coloreeze\Interfaces\Color as ColorInterface;
+use Coloreeze\Exceptions\InvalidInput;
+use Coloreeze\Interfaces\Color as ColorInterface;
 
 final class ColorFactory
 {

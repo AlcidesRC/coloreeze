@@ -2,15 +2,15 @@
 
 namespace UnitTests;
 
-use Fonil\Coloreeze\ColorCIELab;
-use Fonil\Coloreeze\ColorCMYK;
-use Fonil\Coloreeze\ColorHex;
-use Fonil\Coloreeze\ColorHSB;
-use Fonil\Coloreeze\ColorHSL;
-use Fonil\Coloreeze\ColorInt;
-use Fonil\Coloreeze\ColorRGBA;
-use Fonil\Coloreeze\ColorXYZ;
-use Fonil\Coloreeze\Exceptions\InvalidInput;
+use Coloreeze\ColorCIELab;
+use Coloreeze\ColorCMYK;
+use Coloreeze\ColorHex;
+use Coloreeze\ColorHSB;
+use Coloreeze\ColorHSL;
+use Coloreeze\ColorInt;
+use Coloreeze\ColorRGBA;
+use Coloreeze\ColorXYZ;
+use Coloreeze\Exceptions\InvalidInput;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -23,10 +23,10 @@ final class ColorHSBTest extends TestCase
     //-----------------------------------------------------------------------------------------------------------------
 
     /**
-     * @covers \Fonil\Coloreeze\Color::validateIsInRange
-     * @covers \Fonil\Coloreeze\ColorHSB::__construct
-     * @covers \Fonil\Coloreeze\Exceptions\InvalidInput::notInRange
-     * @covers \Fonil\Coloreeze\Color::isInRange
+     * @covers \Coloreeze\Color::validateIsInRange
+     * @covers \Coloreeze\ColorHSB::__construct
+     * @covers \Coloreeze\Exceptions\InvalidInput::notInRange
+     * @covers \Coloreeze\Color::isInRange
      *
      * @dataProvider dataProviderForValidation
      */
@@ -57,10 +57,10 @@ final class ColorHSBTest extends TestCase
     /**
      * @param array<int|float> $expectedValue
      *
-     * @covers \Fonil\Coloreeze\ColorHSB::__construct
-     * @covers \Fonil\Coloreeze\ColorHSB::getValue
-     * @covers \Fonil\Coloreeze\Color::validateIsInRange
-     * @covers \Fonil\Coloreeze\Color::isInRange
+     * @covers \Coloreeze\ColorHSB::__construct
+     * @covers \Coloreeze\ColorHSB::getValue
+     * @covers \Coloreeze\Color::validateIsInRange
+     * @covers \Coloreeze\Color::isInRange
      *
      * @dataProvider dataProviderForEntity
      */
@@ -93,12 +93,12 @@ final class ColorHSBTest extends TestCase
     /**
      * @param array<int, array<int, array<int, float>|string>> $expectedValue
      *
-     * @covers \Fonil\Coloreeze\ColorHSB::__construct
-     * @covers \Fonil\Coloreeze\ColorHSB::fromString
-     * @covers \Fonil\Coloreeze\ColorHSB::getValue
-     * @covers \Fonil\Coloreeze\Color::isInRange
-     * @covers \Fonil\Coloreeze\Color::validateIsInRange
-     * @covers \Fonil\Coloreeze\Color::validateFormat
+     * @covers \Coloreeze\ColorHSB::__construct
+     * @covers \Coloreeze\ColorHSB::fromString
+     * @covers \Coloreeze\ColorHSB::getValue
+     * @covers \Coloreeze\Color::isInRange
+     * @covers \Coloreeze\Color::validateIsInRange
+     * @covers \Coloreeze\Color::validateFormat
      *
      * @dataProvider dataProviderForFromString
      */
@@ -128,19 +128,19 @@ final class ColorHSBTest extends TestCase
     //-----------------------------------------------------------------------------------------------------------------
 
     /**
-     * @covers \Fonil\Coloreeze\Color::isInRange
-     * @covers \Fonil\Coloreeze\Color::validateIsInRange
-     * @covers \Fonil\Coloreeze\ColorCIELab::__construct
-     * @covers \Fonil\Coloreeze\ColorCIELab::__toString
-     * @covers \Fonil\Coloreeze\ColorCIELab::distanceCIE76
-     * @covers \Fonil\Coloreeze\ColorHSB::distanceCIE76
-     * @covers \Fonil\Coloreeze\ColorHSB::toCIELab
-     * @covers \Fonil\Coloreeze\ColorHSB::toRGBA
-     * @covers \Fonil\Coloreeze\ColorHSB::toXYZ
-     * @covers \Fonil\Coloreeze\ColorRGBA::__construct
-     * @covers \Fonil\Coloreeze\ColorRGBA::toXYZ
-     * @covers \Fonil\Coloreeze\ColorXYZ::__construct
-     * @covers \Fonil\Coloreeze\ColorXYZ::toCIELab
+     * @covers \Coloreeze\Color::isInRange
+     * @covers \Coloreeze\Color::validateIsInRange
+     * @covers \Coloreeze\ColorCIELab::__construct
+     * @covers \Coloreeze\ColorCIELab::__toString
+     * @covers \Coloreeze\ColorCIELab::distanceCIE76
+     * @covers \Coloreeze\ColorHSB::distanceCIE76
+     * @covers \Coloreeze\ColorHSB::toCIELab
+     * @covers \Coloreeze\ColorHSB::toRGBA
+     * @covers \Coloreeze\ColorHSB::toXYZ
+     * @covers \Coloreeze\ColorRGBA::__construct
+     * @covers \Coloreeze\ColorRGBA::toXYZ
+     * @covers \Coloreeze\ColorXYZ::__construct
+     * @covers \Coloreeze\ColorXYZ::toCIELab
      *
      * @dataProvider dataProviderForDistanceCIE76
      */
@@ -152,7 +152,7 @@ final class ColorHSBTest extends TestCase
     }
 
     /**
-     * @return array<int, array<int, \Fonil\Coloreeze\ColorHSB|float>>
+     * @return array<int, array<int, \Coloreeze\ColorHSB|float>>
      */
     public function dataProviderForDistanceCIE76(): array
     {
@@ -166,8 +166,8 @@ final class ColorHSBTest extends TestCase
     //-----------------------------------------------------------------------------------------------------------------
 
     /**
-     * @covers \Fonil\Coloreeze\ColorHSB::__construct
-     * @covers \Fonil\Coloreeze\ColorHSB::__toString
+     * @covers \Coloreeze\ColorHSB::__construct
+     * @covers \Coloreeze\ColorHSB::__toString
      *
      * @dataProvider dataProviderForToString
      */
@@ -179,7 +179,7 @@ final class ColorHSBTest extends TestCase
     }
 
     /**
-     * @return array<int, array<int, \Fonil\Coloreeze\ColorHSB|string>>
+     * @return array<int, array<int, \Coloreeze\ColorHSB|string>>
      */
     public function dataProviderForToString(): array
     {
@@ -191,15 +191,15 @@ final class ColorHSBTest extends TestCase
     //-----------------------------------------------------------------------------------------------------------------
 
     /**
-     * @covers \Fonil\Coloreeze\ColorHex::__construct
-     * @covers \Fonil\Coloreeze\ColorHSB::__construct
-     * @covers \Fonil\Coloreeze\ColorHSB::toHex
-     * @covers \Fonil\Coloreeze\ColorHSB::toRGBA
-     * @covers \Fonil\Coloreeze\ColorRGBA::__construct
-     * @covers \Fonil\Coloreeze\Color::validateIsInRange
-     * @covers \Fonil\Coloreeze\Color::isInRange
-     * @covers \Fonil\Coloreeze\ColorRGBA::toHex
-     * @covers \Fonil\Coloreeze\Color::validateFormat
+     * @covers \Coloreeze\ColorHex::__construct
+     * @covers \Coloreeze\ColorHSB::__construct
+     * @covers \Coloreeze\ColorHSB::toHex
+     * @covers \Coloreeze\ColorHSB::toRGBA
+     * @covers \Coloreeze\ColorRGBA::__construct
+     * @covers \Coloreeze\Color::validateIsInRange
+     * @covers \Coloreeze\Color::isInRange
+     * @covers \Coloreeze\ColorRGBA::toHex
+     * @covers \Coloreeze\Color::validateFormat
      *
      * @dataProvider dataProviderForToHex
      */
@@ -212,7 +212,7 @@ final class ColorHSBTest extends TestCase
     }
 
     /**
-     * @return array<int, array<int, \Fonil\Coloreeze\ColorHSB|\Fonil\Coloreeze\ColorHex>>
+     * @return array<int, array<int, \Coloreeze\ColorHSB|\Coloreeze\ColorHex>>
      */
     public function dataProviderForToHex(): array
     {
@@ -224,19 +224,19 @@ final class ColorHSBTest extends TestCase
     //-----------------------------------------------------------------------------------------------------------------
 
     /**
-     * @covers \Fonil\Coloreeze\ColorHex::__construct
-     * @covers \Fonil\Coloreeze\ColorHex::toInt
-     * @covers \Fonil\Coloreeze\ColorHSB::__construct
-     * @covers \Fonil\Coloreeze\ColorHSB::toHex
-     * @covers \Fonil\Coloreeze\ColorHSB::toInt
-     * @covers \Fonil\Coloreeze\ColorHSB::toRGBA
-     * @covers \Fonil\Coloreeze\ColorInt::__construct
-     * @covers \Fonil\Coloreeze\ColorRGBA::__construct
-     * @covers \Fonil\Coloreeze\ColorRGBA::toInt
-     * @covers \Fonil\Coloreeze\Color::validateIsInRange
-     * @covers \Fonil\Coloreeze\Color::isInRange
-     * @covers \Fonil\Coloreeze\ColorRGBA::toHex
-     * @covers \Fonil\Coloreeze\Color::validateFormat
+     * @covers \Coloreeze\ColorHex::__construct
+     * @covers \Coloreeze\ColorHex::toInt
+     * @covers \Coloreeze\ColorHSB::__construct
+     * @covers \Coloreeze\ColorHSB::toHex
+     * @covers \Coloreeze\ColorHSB::toInt
+     * @covers \Coloreeze\ColorHSB::toRGBA
+     * @covers \Coloreeze\ColorInt::__construct
+     * @covers \Coloreeze\ColorRGBA::__construct
+     * @covers \Coloreeze\ColorRGBA::toInt
+     * @covers \Coloreeze\Color::validateIsInRange
+     * @covers \Coloreeze\Color::isInRange
+     * @covers \Coloreeze\ColorRGBA::toHex
+     * @covers \Coloreeze\Color::validateFormat
      *
      * @dataProvider dataProviderForToInt
      */
@@ -249,7 +249,7 @@ final class ColorHSBTest extends TestCase
     }
 
     /**
-     * @return array<int, array<int, \Fonil\Coloreeze\ColorHSB|\Fonil\Coloreeze\ColorInt>>
+     * @return array<int, array<int, \Coloreeze\ColorHSB|\Coloreeze\ColorInt>>
      */
     public function dataProviderForToInt(): array
     {
@@ -261,11 +261,11 @@ final class ColorHSBTest extends TestCase
     //-----------------------------------------------------------------------------------------------------------------
 
     /**
-     * @covers \Fonil\Coloreeze\ColorHSB::__construct
-     * @covers \Fonil\Coloreeze\ColorHSB::toRGBA
-     * @covers \Fonil\Coloreeze\ColorRGBA::__construct
-     * @covers \Fonil\Coloreeze\Color::validateIsInRange
-     * @covers \Fonil\Coloreeze\Color::isInRange
+     * @covers \Coloreeze\ColorHSB::__construct
+     * @covers \Coloreeze\ColorHSB::toRGBA
+     * @covers \Coloreeze\ColorRGBA::__construct
+     * @covers \Coloreeze\Color::validateIsInRange
+     * @covers \Coloreeze\Color::isInRange
      *
      * @dataProvider dataProviderForToRGBA
      */
@@ -278,7 +278,7 @@ final class ColorHSBTest extends TestCase
     }
 
     /**
-     * @return array<int, array<int, \Fonil\Coloreeze\ColorHSB|\Fonil\Coloreeze\ColorRGBA>>
+     * @return array<int, array<int, \Coloreeze\ColorHSB|\Coloreeze\ColorRGBA>>
      */
     public function dataProviderForToRGBA(): array
     {
@@ -290,17 +290,17 @@ final class ColorHSBTest extends TestCase
     //-----------------------------------------------------------------------------------------------------------------
 
     /**
-     * @covers \Fonil\Coloreeze\Color::isInRange
-     * @covers \Fonil\Coloreeze\Color::validateIsInRange
-     * @covers \Fonil\Coloreeze\ColorCMYK::__construct
-     * @covers \Fonil\Coloreeze\ColorHex::__construct
-     * @covers \Fonil\Coloreeze\ColorHex::toCMYK
-     * @covers \Fonil\Coloreeze\ColorRGBA::__construct
-     * @covers \Fonil\Coloreeze\ColorRGBA::toCMYK
-     * @covers \Fonil\Coloreeze\ColorRGBA::toHex
-     * @covers Fonil\Coloreeze\ColorHSB::toCMYK
-     * @covers Fonil\Coloreeze\ColorHSB::toRGBA
-     * @covers \Fonil\Coloreeze\Color::validateFormat
+     * @covers \Coloreeze\Color::isInRange
+     * @covers \Coloreeze\Color::validateIsInRange
+     * @covers \Coloreeze\ColorCMYK::__construct
+     * @covers \Coloreeze\ColorHex::__construct
+     * @covers \Coloreeze\ColorHex::toCMYK
+     * @covers \Coloreeze\ColorRGBA::__construct
+     * @covers \Coloreeze\ColorRGBA::toCMYK
+     * @covers \Coloreeze\ColorRGBA::toHex
+     * @covers \Coloreeze\ColorHSB::toCMYK
+     * @covers \Coloreeze\ColorHSB::toRGBA
+     * @covers \Coloreeze\Color::validateFormat
      *
      * @dataProvider dataProviderForToCMYK
      */
@@ -313,7 +313,7 @@ final class ColorHSBTest extends TestCase
     }
 
     /**
-     * @return array<int, array<int, \Fonil\Coloreeze\ColorHSL|\Fonil\Coloreeze\ColorCMYK>>
+     * @return array<int, array<int, \Coloreeze\ColorHSL|\Coloreeze\ColorCMYK>>
      */
     public function dataProviderForToCMYK(): array
     {
@@ -325,14 +325,14 @@ final class ColorHSBTest extends TestCase
     //-----------------------------------------------------------------------------------------------------------------
 
     /**
-     * @covers \Fonil\Coloreeze\Color::isInRange
-     * @covers \Fonil\Coloreeze\Color::validateIsInRange
-     * @covers \Fonil\Coloreeze\ColorHSB::toHSL
-     * @covers \Fonil\Coloreeze\ColorHSB::toRGBA
-     * @covers \Fonil\Coloreeze\ColorHSL::__construct
-     * @covers \Fonil\Coloreeze\ColorHSL::toHSL
-     * @covers \Fonil\Coloreeze\ColorRGBA::__construct
-     * @covers \Fonil\Coloreeze\ColorRGBA::toHSL
+     * @covers \Coloreeze\Color::isInRange
+     * @covers \Coloreeze\Color::validateIsInRange
+     * @covers \Coloreeze\ColorHSB::toHSL
+     * @covers \Coloreeze\ColorHSB::toRGBA
+     * @covers \Coloreeze\ColorHSL::__construct
+     * @covers \Coloreeze\ColorHSL::toHSL
+     * @covers \Coloreeze\ColorRGBA::__construct
+     * @covers \Coloreeze\ColorRGBA::toHSL
      *
      * @dataProvider dataProviderForToHSL
      */
@@ -345,7 +345,7 @@ final class ColorHSBTest extends TestCase
     }
 
     /**
-     * @return array<int, array<int, \Fonil\Coloreeze\ColorHSL|\Fonil\Coloreeze\ColorHSL>>
+     * @return array<int, array<int, \Coloreeze\ColorHSL|\Coloreeze\ColorHSL>>
      */
     public function dataProviderForToHSL(): array
     {
@@ -357,14 +357,14 @@ final class ColorHSBTest extends TestCase
     //-----------------------------------------------------------------------------------------------------------------
 
     /**
-     * @covers \Fonil\Coloreeze\Color::validateIsInRange
-     * @covers \Fonil\Coloreeze\ColorHSB::__construct
-     * @covers \Fonil\Coloreeze\ColorHSB::toRGBA
-     * @covers \Fonil\Coloreeze\ColorHSB::toXYZ
-     * @covers \Fonil\Coloreeze\ColorRGBA::__construct
-     * @covers \Fonil\Coloreeze\ColorRGBA::toXYZ
-     * @covers \Fonil\Coloreeze\ColorXYZ::__construct
-     * @covers \Fonil\Coloreeze\Color::isInRange
+     * @covers \Coloreeze\Color::validateIsInRange
+     * @covers \Coloreeze\ColorHSB::__construct
+     * @covers \Coloreeze\ColorHSB::toRGBA
+     * @covers \Coloreeze\ColorHSB::toXYZ
+     * @covers \Coloreeze\ColorRGBA::__construct
+     * @covers \Coloreeze\ColorRGBA::toXYZ
+     * @covers \Coloreeze\ColorXYZ::__construct
+     * @covers \Coloreeze\Color::isInRange
      *
      * @dataProvider dataProviderForToXYZ
      */
@@ -377,7 +377,7 @@ final class ColorHSBTest extends TestCase
     }
 
     /**
-     * @return array<int, array<int, \Fonil\Coloreeze\ColorHSL|\Fonil\Coloreeze\ColorXYZ>>
+     * @return array<int, array<int, \Coloreeze\ColorHSL|\Coloreeze\ColorXYZ>>
      */
     public function dataProviderForToXYZ(): array
     {
@@ -389,10 +389,10 @@ final class ColorHSBTest extends TestCase
     //-----------------------------------------------------------------------------------------------------------------
 
     /**
-     * @covers \Fonil\Coloreeze\Color::isInRange
-     * @covers \Fonil\Coloreeze\Color::validateIsInRange
-     * @covers \Fonil\Coloreeze\ColorHSB::__construct
-     * @covers \Fonil\Coloreeze\ColorHSB::toHSB
+     * @covers \Coloreeze\Color::isInRange
+     * @covers \Coloreeze\Color::validateIsInRange
+     * @covers \Coloreeze\ColorHSB::__construct
+     * @covers \Coloreeze\ColorHSB::toHSB
      *
      * @dataProvider dataProviderForToHSB
      */
@@ -405,7 +405,7 @@ final class ColorHSBTest extends TestCase
     }
 
     /**
-     * @return array<int, array<int, \Fonil\Coloreeze\ColorHSB|\Fonil\Coloreeze\ColorHSB>>
+     * @return array<int, array<int, \Coloreeze\ColorHSB|\Coloreeze\ColorHSB>>
      */
     public function dataProviderForToHSB(): array
     {
@@ -417,16 +417,16 @@ final class ColorHSBTest extends TestCase
     //-----------------------------------------------------------------------------------------------------------------
 
     /**
-     * @covers \Fonil\Coloreeze\Color::isInRange
-     * @covers \Fonil\Coloreeze\Color::validateIsInRange
-     * @covers \Fonil\Coloreeze\ColorCIELab::__construct
-     * @covers \Fonil\Coloreeze\ColorHSB::toCIELab
-     * @covers \Fonil\Coloreeze\ColorHSB::toRGBA
-     * @covers \Fonil\Coloreeze\ColorHSB::toXYZ
-     * @covers \Fonil\Coloreeze\ColorRGBA::__construct
-     * @covers \Fonil\Coloreeze\ColorRGBA::toXYZ
-     * @covers \Fonil\Coloreeze\ColorXYZ::__construct
-     * @covers \Fonil\Coloreeze\ColorXYZ::toCIELab
+     * @covers \Coloreeze\Color::isInRange
+     * @covers \Coloreeze\Color::validateIsInRange
+     * @covers \Coloreeze\ColorCIELab::__construct
+     * @covers \Coloreeze\ColorHSB::toCIELab
+     * @covers \Coloreeze\ColorHSB::toRGBA
+     * @covers \Coloreeze\ColorHSB::toXYZ
+     * @covers \Coloreeze\ColorRGBA::__construct
+     * @covers \Coloreeze\ColorRGBA::toXYZ
+     * @covers \Coloreeze\ColorXYZ::__construct
+     * @covers \Coloreeze\ColorXYZ::toCIELab
      *
      * @dataProvider dataProviderForToCIELab
      */
@@ -439,7 +439,7 @@ final class ColorHSBTest extends TestCase
     }
 
     /**
-     * @return array<int, array<int, \Fonil\Coloreeze\ColorHSB|\Fonil\Coloreeze\ColorCIELab>>
+     * @return array<int, array<int, \Coloreeze\ColorHSB|\Coloreeze\ColorCIELab>>
      */
     public function dataProviderForToCIELab(): array
     {
@@ -451,15 +451,15 @@ final class ColorHSBTest extends TestCase
     //-----------------------------------------------------------------------------------------------------------------
 
     /**
-     * @covers \Fonil\Coloreeze\Color::isInRange
-     * @covers \Fonil\Coloreeze\Color::validateIsInRange
-     * @covers \Fonil\Coloreeze\ColorHSB::__construct
-     * @covers \Fonil\Coloreeze\ColorHSB::toGreyscale
-     * @covers \Fonil\Coloreeze\ColorHSB::toRGBA
-     * @covers \Fonil\Coloreeze\ColorRGBA::__construct
-     * @covers \Fonil\Coloreeze\ColorRGBA::toGreyscale
-     * @covers \Fonil\Coloreeze\ColorRGBA::toHSB
-     * @covers \Fonil\Coloreeze\ColorRGBA::toXYZ
+     * @covers \Coloreeze\Color::isInRange
+     * @covers \Coloreeze\Color::validateIsInRange
+     * @covers \Coloreeze\ColorHSB::__construct
+     * @covers \Coloreeze\ColorHSB::toGreyscale
+     * @covers \Coloreeze\ColorHSB::toRGBA
+     * @covers \Coloreeze\ColorRGBA::__construct
+     * @covers \Coloreeze\ColorRGBA::toGreyscale
+     * @covers \Coloreeze\ColorRGBA::toHSB
+     * @covers \Coloreeze\ColorRGBA::toXYZ
      *
      * @dataProvider dataProviderForToGreyscale
      */
@@ -472,7 +472,7 @@ final class ColorHSBTest extends TestCase
     }
 
     /**
-     * @return array<int, array<int, \Fonil\Coloreeze\ColorHSB>>
+     * @return array<int, array<int, \Coloreeze\ColorHSB>>
      */
     public function dataProviderForToGreyscale(): array
     {
@@ -484,14 +484,14 @@ final class ColorHSBTest extends TestCase
     //-----------------------------------------------------------------------------------------------------------------
 
     /**
-     * @covers \Fonil\Coloreeze\Color::isInRange
-     * @covers \Fonil\Coloreeze\Color::validateIsInRange
-     * @covers \Fonil\Coloreeze\ColorHSB::__construct
-     * @covers \Fonil\Coloreeze\ColorHSB::toComplementary
-     * @covers \Fonil\Coloreeze\ColorHSB::toRGBA
-     * @covers \Fonil\Coloreeze\ColorRGBA::__construct
-     * @covers \Fonil\Coloreeze\ColorRGBA::toComplementary
-     * @covers \Fonil\Coloreeze\ColorRGBA::toHSB
+     * @covers \Coloreeze\Color::isInRange
+     * @covers \Coloreeze\Color::validateIsInRange
+     * @covers \Coloreeze\ColorHSB::__construct
+     * @covers \Coloreeze\ColorHSB::toComplementary
+     * @covers \Coloreeze\ColorHSB::toRGBA
+     * @covers \Coloreeze\ColorRGBA::__construct
+     * @covers \Coloreeze\ColorRGBA::toComplementary
+     * @covers \Coloreeze\ColorRGBA::toHSB
      *
      * @dataProvider dataProviderForToComplementary
      */
@@ -504,7 +504,7 @@ final class ColorHSBTest extends TestCase
     }
 
     /**
-     * @return array<int, array<int, \Fonil\Coloreeze\ColorHSB>>
+     * @return array<int, array<int, \Coloreeze\ColorHSB>>
      */
     public function dataProviderForToComplementary(): array
     {
@@ -516,14 +516,14 @@ final class ColorHSBTest extends TestCase
     //-----------------------------------------------------------------------------------------------------------------
 
     /**
-     * @covers \Fonil\Coloreeze\Color::isInRange
-     * @covers \Fonil\Coloreeze\Color::validateIsInRange
-     * @covers \Fonil\Coloreeze\ColorHSB::__construct
-     * @covers \Fonil\Coloreeze\ColorHSB::adjustBrightness
-     * @covers \Fonil\Coloreeze\ColorHSB::toRGBA
-     * @covers \Fonil\Coloreeze\ColorRGBA::__construct
-     * @covers \Fonil\Coloreeze\ColorRGBA::adjustBrightness
-     * @covers \Fonil\Coloreeze\ColorRGBA::toHSB
+     * @covers \Coloreeze\Color::isInRange
+     * @covers \Coloreeze\Color::validateIsInRange
+     * @covers \Coloreeze\ColorHSB::__construct
+     * @covers \Coloreeze\ColorHSB::adjustBrightness
+     * @covers \Coloreeze\ColorHSB::toRGBA
+     * @covers \Coloreeze\ColorRGBA::__construct
+     * @covers \Coloreeze\ColorRGBA::adjustBrightness
+     * @covers \Coloreeze\ColorRGBA::toHSB
      *
      * @dataProvider dataProviderForToDarker
      */
@@ -536,7 +536,7 @@ final class ColorHSBTest extends TestCase
     }
 
     /**
-     * @return array<int, array<int, \Fonil\Coloreeze\ColorHSB>>
+     * @return array<int, array<int, \Coloreeze\ColorHSB>>
      */
     public function dataProviderForToDarker(): array
     {
@@ -548,14 +548,14 @@ final class ColorHSBTest extends TestCase
     //-----------------------------------------------------------------------------------------------------------------
 
     /**
-     * @covers \Fonil\Coloreeze\Color::isInRange
-     * @covers \Fonil\Coloreeze\Color::validateIsInRange
-     * @covers \Fonil\Coloreeze\ColorHSB::__construct
-     * @covers \Fonil\Coloreeze\ColorHSB::adjustBrightness
-     * @covers \Fonil\Coloreeze\ColorHSB::toRGBA
-     * @covers \Fonil\Coloreeze\ColorRGBA::__construct
-     * @covers \Fonil\Coloreeze\ColorRGBA::adjustBrightness
-     * @covers \Fonil\Coloreeze\ColorRGBA::toHSB
+     * @covers \Coloreeze\Color::isInRange
+     * @covers \Coloreeze\Color::validateIsInRange
+     * @covers \Coloreeze\ColorHSB::__construct
+     * @covers \Coloreeze\ColorHSB::adjustBrightness
+     * @covers \Coloreeze\ColorHSB::toRGBA
+     * @covers \Coloreeze\ColorRGBA::__construct
+     * @covers \Coloreeze\ColorRGBA::adjustBrightness
+     * @covers \Coloreeze\ColorRGBA::toHSB
      *
      * @dataProvider dataProviderForToLighter
      */
@@ -568,7 +568,7 @@ final class ColorHSBTest extends TestCase
     }
 
     /**
-     * @return array<int, array<int, \Fonil\Coloreeze\ColorHSB>>
+     * @return array<int, array<int, \Coloreeze\ColorHSB>>
      */
     public function dataProviderForToLighter(): array
     {

@@ -2,16 +2,16 @@
 
 namespace UnitTests;
 
-use Fonil\Coloreeze\ColorCIELab;
-use Fonil\Coloreeze\ColorCMYK;
-use Fonil\Coloreeze\ColorFactory;
-use Fonil\Coloreeze\ColorHex;
-use Fonil\Coloreeze\ColorHSB;
-use Fonil\Coloreeze\ColorHSL;
-use Fonil\Coloreeze\ColorInt;
-use Fonil\Coloreeze\ColorRGBA;
-use Fonil\Coloreeze\ColorXYZ;
-use Fonil\Coloreeze\Exceptions\InvalidInput;
+use Coloreeze\ColorCIELab;
+use Coloreeze\ColorCMYK;
+use Coloreeze\ColorFactory;
+use Coloreeze\ColorHex;
+use Coloreeze\ColorHSB;
+use Coloreeze\ColorHSL;
+use Coloreeze\ColorInt;
+use Coloreeze\ColorRGBA;
+use Coloreeze\ColorXYZ;
+use Coloreeze\Exceptions\InvalidInput;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -24,22 +24,22 @@ final class ColorFactoryTest extends TestCase
     //-----------------------------------------------------------------------------------------------------------------
 
     /**
-     * @covers \Fonil\Coloreeze\ColorFactory::fromString
-     * @covers \Fonil\Coloreeze\Color::isInRange
-     * @covers \Fonil\Coloreeze\Color::validateFormat
-     * @covers \Fonil\Coloreeze\Color::validateIsInRange
-     * @covers \Fonil\Coloreeze\ColorCIELab::fromString
-     * @covers \Fonil\Coloreeze\ColorCMYK::fromString
-     * @covers \Fonil\Coloreeze\ColorHSB::fromString
-     * @covers \Fonil\Coloreeze\ColorHSL::fromString
-     * @covers \Fonil\Coloreeze\ColorHex::fromString
-     * @covers \Fonil\Coloreeze\ColorInt::fromString
-     * @covers \Fonil\Coloreeze\ColorRGBA::__construct
-     * @covers \Fonil\Coloreeze\ColorRGBA::fromString
-     * @covers \Fonil\Coloreeze\ColorXYZ::fromString
-     * @covers \Fonil\Coloreeze\Exceptions\InvalidInput::notInRange
-     * @covers \Fonil\Coloreeze\Exceptions\InvalidInput::notMatchingAnyColor
-     * @covers \Fonil\Coloreeze\Exceptions\InvalidInput::wrongFormat
+     * @covers \Coloreeze\ColorFactory::fromString
+     * @covers \Coloreeze\Color::isInRange
+     * @covers \Coloreeze\Color::validateFormat
+     * @covers \Coloreeze\Color::validateIsInRange
+     * @covers \Coloreeze\ColorCIELab::fromString
+     * @covers \Coloreeze\ColorCMYK::fromString
+     * @covers \Coloreeze\ColorHSB::fromString
+     * @covers \Coloreeze\ColorHSL::fromString
+     * @covers \Coloreeze\ColorHex::fromString
+     * @covers \Coloreeze\ColorInt::fromString
+     * @covers \Coloreeze\ColorRGBA::__construct
+     * @covers \Coloreeze\ColorRGBA::fromString
+     * @covers \Coloreeze\ColorXYZ::fromString
+     * @covers \Coloreeze\Exceptions\InvalidInput::notInRange
+     * @covers \Coloreeze\Exceptions\InvalidInput::notMatchingAnyColor
+     * @covers \Coloreeze\Exceptions\InvalidInput::wrongFormat
      *
      * @dataProvider dataProviderUnvalidInput
      */
@@ -65,27 +65,27 @@ final class ColorFactoryTest extends TestCase
     //-----------------------------------------------------------------------------------------------------------------
 
     /**
-     * @covers \Fonil\Coloreeze\Color::isInRange
-     * @covers \Fonil\Coloreeze\Color::validateFormat
-     * @covers \Fonil\Coloreeze\Color::validateIsInRange
-     * @covers \Fonil\Coloreeze\ColorCIELab::__construct
-     * @covers \Fonil\Coloreeze\ColorCIELab::fromString
-     * @covers \Fonil\Coloreeze\ColorCMYK::__construct
-     * @covers \Fonil\Coloreeze\ColorCMYK::fromString
-     * @covers \Fonil\Coloreeze\ColorFactory::fromString
-     * @covers \Fonil\Coloreeze\ColorHex::__construct
-     * @covers \Fonil\Coloreeze\ColorHex::fromString
-     * @covers \Fonil\Coloreeze\ColorHSB::__construct
-     * @covers \Fonil\Coloreeze\ColorHSB::fromString
-     * @covers \Fonil\Coloreeze\ColorHSL::__construct
-     * @covers \Fonil\Coloreeze\ColorHSL::fromString
-     * @covers \Fonil\Coloreeze\ColorInt::__construct
-     * @covers \Fonil\Coloreeze\ColorInt::fromString
-     * @covers \Fonil\Coloreeze\ColorRGBA::__construct
-     * @covers \Fonil\Coloreeze\ColorRGBA::fromString
-     * @covers \Fonil\Coloreeze\ColorXYZ::__construct
-     * @covers \Fonil\Coloreeze\ColorXYZ::fromString
-     * @covers \Fonil\Coloreeze\Exceptions\InvalidInput::wrongFormat
+     * @covers \Coloreeze\Color::isInRange
+     * @covers \Coloreeze\Color::validateFormat
+     * @covers \Coloreeze\Color::validateIsInRange
+     * @covers \Coloreeze\ColorCIELab::__construct
+     * @covers \Coloreeze\ColorCIELab::fromString
+     * @covers \Coloreeze\ColorCMYK::__construct
+     * @covers \Coloreeze\ColorCMYK::fromString
+     * @covers \Coloreeze\ColorFactory::fromString
+     * @covers \Coloreeze\ColorHex::__construct
+     * @covers \Coloreeze\ColorHex::fromString
+     * @covers \Coloreeze\ColorHSB::__construct
+     * @covers \Coloreeze\ColorHSB::fromString
+     * @covers \Coloreeze\ColorHSL::__construct
+     * @covers \Coloreeze\ColorHSL::fromString
+     * @covers \Coloreeze\ColorInt::__construct
+     * @covers \Coloreeze\ColorInt::fromString
+     * @covers \Coloreeze\ColorRGBA::__construct
+     * @covers \Coloreeze\ColorRGBA::fromString
+     * @covers \Coloreeze\ColorXYZ::__construct
+     * @covers \Coloreeze\ColorXYZ::fromString
+     * @covers \Coloreeze\Exceptions\InvalidInput::wrongFormat
      *
      * @dataProvider dataProviderValidInput
      */

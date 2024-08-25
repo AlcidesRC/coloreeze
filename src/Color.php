@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Fonil\Coloreeze;
+namespace Coloreeze;
 
-use Fonil\Coloreeze\Exceptions\InvalidInput;
+use Coloreeze\Exceptions\InvalidInput;
 
 abstract class Color
 {

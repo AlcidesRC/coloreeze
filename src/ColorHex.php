@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Fonil\Coloreeze;
+namespace Coloreeze;
 
-use Fonil\Coloreeze\Interfaces\Color as ColorInterface;
+use Coloreeze\Interfaces\Color as ColorInterface;
 
 final class ColorHex extends Color implements ColorInterface
 {
