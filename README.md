@@ -33,7 +33,7 @@ Additionally this library contains some useful methods to:
 You can install the package via composer:
 
 ```bash
-$ composer require fonil/coloreeze
+$ composer require alcidesrc/coloreeze
 ```
 
 ## Usage
@@ -323,7 +323,7 @@ Traits ......................................................... 0.0 %
 
 ## Changelog
 
-Please visit [CHANGELOG](https://github.com/fonil/coloreeze/blob/master/CHANGELOG.md) for further information related with latest changes.
+Please visit [CHANGELOG](https://github.com/alcidesrc/coloreeze/blob/master/CHANGELOG.md) for further information related with latest changes.
 
 ## Security Vulnerabilities
 
@@ -337,8 +337,8 @@ Only the latest major version receives security fixes.
 
 ### Reporting a Vulnerability
 
-If you discover a security vulnerability within this project, please [open an issue here](https://github.com/fonil/coloreeze/issues). All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within this project, please [open an issue here](https://github.com/alcidesrc/coloreeze/issues). All security vulnerabilities will be promptly addressed.
 
 ## License
 
-The MIT License (MIT). Please see [License File](https://github.com/fonil/coloreeze/blob/main/LICENSE) for more information.
+The MIT License (MIT). Please see [License File](https://github.com/alcidesrc/coloreeze/blob/main/LICENSE) for more information.
