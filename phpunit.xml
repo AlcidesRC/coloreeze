@@ -5,14 +5,13 @@
     beStrictAboutOutputDuringTests="true"
     beStrictAboutTodoAnnotatedTests="true"
     bootstrap="vendor/autoload.php"
-    cacheResultFile=".cache/test-results"
+    cacheResult="false"
     colors="true"
     convertDeprecationsToExceptions="false"
     executionOrder="random"
     failOnRisky="true"
     failOnWarning="true"
     forceCoversAnnotation="true"
-    printerClass="Codedungeon\PHPUnitPrettyResultPrinter\Printer"
     resolveDependencies="true"
     verbose="true"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -30,7 +29,6 @@
     </testsuites>
 
     <coverage
-        cacheDirectory=".cache/coverage"
         disableCodeCoverageIgnore="true"
         ignoreDeprecatedCodeUnits="true"
         includeUncoveredFiles="true"
