@@ -321,10 +321,6 @@ Traits ......................................................... 0.0 %
 [MISC] 100 pts on coding style and 0 security issues encountered
 ```
 
-## Changelog
-
-Please visit [CHANGELOG](https://github.com/alcidesrc/coloreeze/blob/master/CHANGELOG.md) for further information related with latest changes.
-
 ## Security Vulnerabilities
 
 Please review our security policy on how to report security vulnerabilities:
