@@ -11,25 +11,26 @@ use Coloreeze\ColorInt;
 use Coloreeze\ColorRGBA;
 use Coloreeze\ColorXYZ;
 use Coloreeze\Exceptions\InvalidInput;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @internal
- *
- * @coversNothing
- */
+#[CoversClass(\Coloreeze\ColorCIELab::class)]
+#[CoversClass(\Coloreeze\ColorCMYK::class)]
+#[CoversClass(\Coloreeze\ColorHSB::class)]
+#[CoversClass(\Coloreeze\ColorHSL::class)]
+#[CoversClass(\Coloreeze\ColorHex::class)]
+#[CoversClass(\Coloreeze\ColorInt::class)]
+#[CoversClass(\Coloreeze\ColorRGBA::class)]
+#[CoversClass(\Coloreeze\ColorXYZ::class)]
+#[CoversClass(\Coloreeze\Exceptions\InvalidInput::class)]
 final class ColorCIELabTest extends TestCase
 {
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\ColorCIELab::__construct
-     * @covers \Coloreeze\Exceptions\InvalidInput::notInRange
-     * @covers \Coloreeze\Color::isInRange
-     *
-     * @dataProvider dataProviderForValidation
-     */
+    #[Test]
+    #[DataProvider('dataProviderForValidation')]
     public function testValidation(float $l, float $a, float $b): void
     {
         static::expectException(InvalidInput::class);
@@ -40,7 +41,7 @@ final class ColorCIELabTest extends TestCase
     /**
      * @return array<int, array<int, int|float>>
      */
-    public function dataProviderForValidation(): array
+    public static function dataProviderForValidation(): array
     {
         return [
             [ColorCIELab::VALUE_MIN__L - 1, 0, 0],
@@ -54,16 +55,8 @@ final class ColorCIELabTest extends TestCase
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @param array<int> $expectedValue
-     *
-     * @covers \Coloreeze\ColorCIELab::__construct
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\Color::isInRange
-     * @covers \Coloreeze\ColorCIELab::getValue
-     *
-     * @dataProvider dataProviderForEntity
-     */
+    #[Test]
+    #[DataProvider('dataProviderForEntity')]
     public function testEntity(float $l, float $a, float $b, array $expectedValue): void
     {
         $sut = new ColorCIELab($l, $a, $b);
@@ -75,7 +68,7 @@ final class ColorCIELabTest extends TestCase
     /**
      * @return array<int, array<int, array<int, float>|int>>
      */
-    public function dataProviderForEntity(): array
+    public static function dataProviderForEntity(): array
     {
         return [
             [0, 0, 0, [0.0000, 0.0000, 0.0000]],
@@ -86,18 +79,8 @@ final class ColorCIELabTest extends TestCase
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @param array<int, array<int, array<int, float>|string>> $expectedValue
-     *
-     * @covers \Coloreeze\ColorCIELab::__construct
-     * @covers \Coloreeze\ColorCIELab::fromString
-     * @covers \Coloreeze\ColorCIELab::getValue
-     * @covers \Coloreeze\Color::isInRange
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\Color::validateFormat
-     *
-     * @dataProvider dataProviderForFromString
-     */
+    #[Test]
+    #[DataProvider('dataProviderForFromString')]
     public function testFromString(string $inputValue, array $expectedValue): void
     {
         $sut = ColorCIELab::fromString($inputValue);
@@ -109,7 +92,7 @@ final class ColorCIELabTest extends TestCase
     /**
      * @return array<int, array<int, array<int, float>|string>>
      */
-    public function dataProviderForFromString(): array
+    public static function dataProviderForFromString(): array
     {
         return [
             ['CIELab(0,0,0)', [0.0000, 0.0000, 0.0000]],
@@ -119,15 +102,8 @@ final class ColorCIELabTest extends TestCase
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @covers \Coloreeze\Color::isInRange
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\ColorCIELab::__construct
-     * @covers \Coloreeze\ColorCIELab::__toString
-     * @covers \Coloreeze\ColorCIELab::distanceCIE76
-     *
-     * @dataProvider dataProviderForDistanceCIE76
-     */
+    #[Test]
+    #[DataProvider('dataProviderForDistanceCIE76')]
     public function testDistanceCIE76(ColorCIELab $input1, ColorCIELab $input2, float $expectedValue): void
     {
         $sut = $input1->distanceCIE76($input2);
@@ -138,7 +114,7 @@ final class ColorCIELabTest extends TestCase
     /**
      * @return array<int, array<int, \Coloreeze\ColorCIELab|float>>
      */
-    public function dataProviderForDistanceCIE76(): array
+    public static function dataProviderForDistanceCIE76(): array
     {
         return [
             [new ColorCIELab(0, 0, 0), new ColorCIELab(0, 0, 0), 0],
@@ -149,12 +125,8 @@ final class ColorCIELabTest extends TestCase
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @covers \Coloreeze\ColorCIELab::__construct
-     * @covers \Coloreeze\ColorCIELab::__toString
-     *
-     * @dataProvider dataProviderForToString
-     */
+    #[Test]
+    #[DataProvider('dataProviderForToString')]
     public function testToString(ColorCIELab $sut, string $expectedOutput): void
     {
         $output = (string) $sut;
@@ -165,31 +137,17 @@ final class ColorCIELabTest extends TestCase
     /**
      * @return array<int, array<int, \Coloreeze\ColorCIELab|string>>
      */
-    public function dataProviderForToString(): array
+    public static function dataProviderForToString(): array
     {
-        $sources = include __DIR__ . '/DataSources/CIELab.php';
+        $sources = include dirname(__DIR__, 1) . '/DataSources/CIELab.php';
 
         return $sources['toString'];
     }
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @covers \Coloreeze\Color::isInRange
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\ColorCIELab::__construct
-     * @covers \Coloreeze\ColorCIELab::toHex
-     * @covers \Coloreeze\ColorCIELab::toXYZ
-     * @covers \Coloreeze\ColorHex::__construct
-     * @covers \Coloreeze\ColorRGBA::__construct
-     * @covers \Coloreeze\ColorRGBA::toHex
-     * @covers \Coloreeze\ColorXYZ::__construct
-     * @covers \Coloreeze\ColorXYZ::toHex
-     * @covers \Coloreeze\ColorXYZ::toRGBA
-     * @covers \Coloreeze\Color::validateFormat
-     *
-     * @dataProvider dataProviderForToHex
-     */
+    #[Test]
+    #[DataProvider('dataProviderForToHex')]
     public function testToHex(ColorCIELab $sut, ColorHex $expectedOutput): void
     {
         $output = $sut->toHex();
@@ -201,33 +159,17 @@ final class ColorCIELabTest extends TestCase
     /**
      * @return array<int, array<int, \Coloreeze\ColorCIELab|\Coloreeze\ColorHex>>
      */
-    public function dataProviderForToHex(): array
+    public static function dataProviderForToHex(): array
     {
-        $sources = include __DIR__ . '/DataSources/CIELab.php';
+        $sources = include dirname(__DIR__, 1) . '/DataSources/CIELab.php';
 
         return $sources['toHex'];
     }
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @covers \Coloreeze\Color::isInRange
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\ColorCIELab::__construct
-     * @covers \Coloreeze\ColorCIELab::toInt
-     * @covers \Coloreeze\ColorCIELab::toXYZ
-     * @covers \Coloreeze\ColorHex::__construct
-     * @covers \Coloreeze\ColorHex::toInt
-     * @covers \Coloreeze\ColorInt::__construct
-     * @covers \Coloreeze\ColorRGBA::__construct
-     * @covers \Coloreeze\ColorRGBA::toHex
-     * @covers \Coloreeze\ColorXYZ::__construct
-     * @covers \Coloreeze\ColorXYZ::toInt
-     * @covers \Coloreeze\ColorXYZ::toRGBA
-     * @covers \Coloreeze\Color::validateFormat
-     *
-     * @dataProvider dataProviderForToInt
-     */
+    #[Test]
+    #[DataProvider('dataProviderForToInt')]
     public function testToInt(ColorCIELab $sut, ColorInt $expectedOutput): void
     {
         $output = $sut->toInt();
@@ -239,27 +181,17 @@ final class ColorCIELabTest extends TestCase
     /**
      * @return array<int, array<int, \Coloreeze\ColorCIELab|\Coloreeze\ColorInt>>
      */
-    public function dataProviderForToInt(): array
+    public static function dataProviderForToInt(): array
     {
-        $sources = include __DIR__ . '/DataSources/CIELab.php';
+        $sources = include dirname(__DIR__, 1) . '/DataSources/CIELab.php';
 
         return $sources['toInt'];
     }
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @covers \Coloreeze\Color::isInRange
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\ColorCIELab::__construct
-     * @covers \Coloreeze\ColorCIELab::toRGBA
-     * @covers \Coloreeze\ColorCIELab::toXYZ
-     * @covers \Coloreeze\ColorRGBA::__construct
-     * @covers \Coloreeze\ColorXYZ::__construct
-     * @covers \Coloreeze\ColorXYZ::toRGBA
-     *
-     * @dataProvider dataProviderForToRGBA
-     */
+    #[Test]
+    #[DataProvider('dataProviderForToRGBA')]
     public function testToRGBA(ColorCIELab $sut, ColorRGBA $expectedOutput): void
     {
         $output = $sut->toRGBA();
@@ -271,33 +203,17 @@ final class ColorCIELabTest extends TestCase
     /**
      * @return array<int, array<int, \Coloreeze\ColorCIELab|\Coloreeze\ColorRGBA>>
      */
-    public function dataProviderForToRGBA(): array
+    public static function dataProviderForToRGBA(): array
     {
-        $sources = include __DIR__ . '/DataSources/CIELab.php';
+        $sources = include dirname(__DIR__, 1) . '/DataSources/CIELab.php';
 
         return $sources['toRGBA'];
     }
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @covers \Coloreeze\Color::isInRange
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\ColorCIELab::__construct
-     * @covers \Coloreeze\ColorCIELab::toCMYK
-     * @covers \Coloreeze\ColorCIELab::toXYZ
-     * @covers \Coloreeze\ColorCMYK::__construct
-     * @covers \Coloreeze\ColorHex::__construct
-     * @covers \Coloreeze\ColorHex::toCMYK
-     * @covers \Coloreeze\ColorRGBA::__construct
-     * @covers \Coloreeze\ColorRGBA::toHex
-     * @covers \Coloreeze\ColorXYZ::__construct
-     * @covers \Coloreeze\ColorXYZ::toCMYK
-     * @covers \Coloreeze\ColorXYZ::toRGBA
-     * @covers \Coloreeze\Color::validateFormat
-     *
-     * @dataProvider dataProviderForToCMYK
-     */
+    #[Test]
+    #[DataProvider('dataProviderForToCMYK')]
     public function testToCMYK(ColorCIELab $sut, ColorCMYK $expectedOutput): void
     {
         $output = $sut->toCMYK();
@@ -309,30 +225,17 @@ final class ColorCIELabTest extends TestCase
     /**
      * @return array<int, array<int, \Coloreeze\ColorCIELab|\Coloreeze\ColorCMYK>>
      */
-    public function dataProviderForToCMYK(): array
+    public static function dataProviderForToCMYK(): array
     {
-        $sources = include __DIR__ . '/DataSources/CIELab.php';
+        $sources = include dirname(__DIR__, 1) . '/DataSources/CIELab.php';
 
         return $sources['toCMYK'];
     }
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @covers \Coloreeze\Color::isInRange
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\ColorCIELab::__construct
-     * @covers \Coloreeze\ColorCIELab::toHSL
-     * @covers \Coloreeze\ColorCIELab::toXYZ
-     * @covers \Coloreeze\ColorHSL::__construct
-     * @covers \Coloreeze\ColorRGBA::__construct
-     * @covers \Coloreeze\ColorRGBA::toHSL
-     * @covers \Coloreeze\ColorXYZ::__construct
-     * @covers \Coloreeze\ColorXYZ::toHSL
-     * @covers \Coloreeze\ColorXYZ::toRGBA
-     *
-     * @dataProvider dataProviderForToHSL
-     */
+    #[Test]
+    #[DataProvider('dataProviderForToHSL')]
     public function testToHSL(ColorCIELab $sut, ColorHSL $expectedOutput): void
     {
         $output = $sut->toHSL();
@@ -344,24 +247,17 @@ final class ColorCIELabTest extends TestCase
     /**
      * @return array<int, array<int, \Coloreeze\ColorCIELab|\Coloreeze\ColorHSL>>
      */
-    public function dataProviderForToHSL(): array
+    public static function dataProviderForToHSL(): array
     {
-        $sources = include __DIR__ . '/DataSources/CIELab.php';
+        $sources = include dirname(__DIR__, 1) . '/DataSources/CIELab.php';
 
         return $sources['toHSL'];
     }
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @covers \Coloreeze\Color::isInRange
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\ColorCIELab::__construct
-     * @covers \Coloreeze\ColorCIELab::toXYZ
-     * @covers \Coloreeze\ColorXYZ::__construct
-     *
-     * @dataProvider dataProviderForToXYZ
-     */
+    #[Test]
+    #[DataProvider('dataProviderForToXYZ')]
     public function testToXYZ(ColorCIELab $sut, ColorXYZ $expectedOutput): void
     {
         $output = $sut->toXYZ();
@@ -373,30 +269,17 @@ final class ColorCIELabTest extends TestCase
     /**
      * @return array<int, array<int, \Coloreeze\ColorCIELab|\Coloreeze\ColorXYZ>>
      */
-    public function dataProviderForToXYZ(): array
+    public static function dataProviderForToXYZ(): array
     {
-        $sources = include __DIR__ . '/DataSources/CIELab.php';
+        $sources = include dirname(__DIR__, 1) . '/DataSources/CIELab.php';
 
         return $sources['toXYZ'];
     }
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @covers \Coloreeze\Color::isInRange
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\ColorCIELab::__construct
-     * @covers \Coloreeze\ColorCIELab::toHSB
-     * @covers \Coloreeze\ColorCIELab::toXYZ
-     * @covers \Coloreeze\ColorHSB::__construct
-     * @covers \Coloreeze\ColorRGBA::__construct
-     * @covers \Coloreeze\ColorRGBA::toHSB
-     * @covers \Coloreeze\ColorXYZ::__construct
-     * @covers \Coloreeze\ColorXYZ::toHSB
-     * @covers \Coloreeze\ColorXYZ::toRGBA
-     *
-     * @dataProvider dataProviderForToHSB
-     */
+    #[Test]
+    #[DataProvider('dataProviderForToHSB')]
     public function testToHSB(ColorCIELab $sut, ColorHSB $expectedOutput): void
     {
         $output = $sut->toHSB();
@@ -408,23 +291,17 @@ final class ColorCIELabTest extends TestCase
     /**
      * @return array<int, array<int, \Coloreeze\ColorCIELab|\Coloreeze\ColorHSB>>
      */
-    public function dataProviderForToHSB(): array
+    public static function dataProviderForToHSB(): array
     {
-        $sources = include __DIR__ . '/DataSources/CIELab.php';
+        $sources = include dirname(__DIR__, 1) . '/DataSources/CIELab.php';
 
         return $sources['toHSB'];
     }
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @covers \Coloreeze\Color::isInRange
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\ColorCIELab::__construct
-     * @covers \Coloreeze\ColorCIELab::toCIELab
-     *
-     * @dataProvider dataProviderForToCIELab
-     */
+    #[Test]
+    #[DataProvider('dataProviderForToCIELab')]
     public function testToCIELab(ColorCIELab $sut, ColorCIELab $expectedOutput): void
     {
         $output = $sut->toCIELab();
@@ -436,35 +313,17 @@ final class ColorCIELabTest extends TestCase
     /**
      * @return array<int, array<int, \Coloreeze\ColorCIELab|\Coloreeze\ColorCIELab>>
      */
-    public function dataProviderForToCIELab(): array
+    public static function dataProviderForToCIELab(): array
     {
-        $sources = include __DIR__ . '/DataSources/CIELab.php';
+        $sources = include dirname(__DIR__, 1) . '/DataSources/CIELab.php';
 
         return $sources['toCIELab'];
     }
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @covers \Coloreeze\Color::isInRange
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\ColorCIELab::__construct
-     * @covers \Coloreeze\ColorCIELab::toGreyscale
-     * @covers \Coloreeze\ColorCIELab::toRGBA
-     * @covers \Coloreeze\ColorCIELab::toXYZ
-     * @covers \Coloreeze\ColorHex::__construct
-     * @covers \Coloreeze\ColorHex::toCIELab
-     * @covers \Coloreeze\ColorRGBA::__construct
-     * @covers \Coloreeze\ColorRGBA::toCIELab
-     * @covers \Coloreeze\ColorRGBA::toGreyscale
-     * @covers \Coloreeze\ColorRGBA::toHex
-     * @covers \Coloreeze\ColorRGBA::toXYZ
-     * @covers \Coloreeze\ColorXYZ::__construct
-     * @covers \Coloreeze\ColorXYZ::toCIELab
-     * @covers \Coloreeze\ColorXYZ::toRGBA
-     *
-     * @dataProvider dataProviderForToGreyscale
-     */
+    #[Test]
+    #[DataProvider('dataProviderForToGreyscale')]
     public function testToGreyscale(ColorCIELab $sut, ColorCIELab $expectedOutput): void
     {
         $output = $sut->toGreyscale();
@@ -476,32 +335,17 @@ final class ColorCIELabTest extends TestCase
     /**
      * @return array<int, array<int, \Coloreeze\ColorCIELab>>
      */
-    public function dataProviderForToGreyscale(): array
+    public static function dataProviderForToGreyscale(): array
     {
-        $sources = include __DIR__ . '/DataSources/CIELab.php';
+        $sources = include dirname(__DIR__, 1) . '/DataSources/CIELab.php';
 
         return $sources['toGreyscale'];
     }
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @covers \Coloreeze\Color::isInRange
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\ColorCIELab::__construct
-     * @covers \Coloreeze\ColorCIELab::toComplementary
-     * @covers \Coloreeze\ColorCIELab::toRGBA
-     * @covers \Coloreeze\ColorCIELab::toXYZ
-     * @covers \Coloreeze\ColorRGBA::__construct
-     * @covers \Coloreeze\ColorRGBA::toCIELab
-     * @covers \Coloreeze\ColorRGBA::toComplementary
-     * @covers \Coloreeze\ColorRGBA::toXYZ
-     * @covers \Coloreeze\ColorXYZ::__construct
-     * @covers \Coloreeze\ColorXYZ::toCIELab
-     * @covers \Coloreeze\ColorXYZ::toRGBA
-     *
-     * @dataProvider dataProviderForToComplementary
-     */
+    #[Test]
+    #[DataProvider('dataProviderForToComplementary')]
     public function testToComplementary(ColorCIELab $sut, ColorCIELab $expectedOutput): void
     {
         $output = $sut->toComplementary();
@@ -513,32 +357,17 @@ final class ColorCIELabTest extends TestCase
     /**
      * @return array<int, array<int, \Coloreeze\ColorCIELab>>
      */
-    public function dataProviderForToComplementary(): array
+    public static function dataProviderForToComplementary(): array
     {
-        $sources = include __DIR__ . '/DataSources/CIELab.php';
+        $sources = include dirname(__DIR__, 1) . '/DataSources/CIELab.php';
 
         return $sources['toComplementary'];
     }
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @covers \Coloreeze\Color::isInRange
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\ColorCIELab::__construct
-     * @covers \Coloreeze\ColorCIELab::adjustBrightness
-     * @covers \Coloreeze\ColorCIELab::toRGBA
-     * @covers \Coloreeze\ColorCIELab::toXYZ
-     * @covers \Coloreeze\ColorRGBA::__construct
-     * @covers \Coloreeze\ColorRGBA::adjustBrightness
-     * @covers \Coloreeze\ColorRGBA::toCIELab
-     * @covers \Coloreeze\ColorRGBA::toXYZ
-     * @covers \Coloreeze\ColorXYZ::__construct
-     * @covers \Coloreeze\ColorXYZ::toCIELab
-     * @covers \Coloreeze\ColorXYZ::toRGBA
-     *
-     * @dataProvider dataProviderForToDarker
-     */
+    #[Test]
+    #[DataProvider('dataProviderForToDarker')]
     public function testToDarker(ColorCIELab $sut, ColorCIELab $expectedOutput): void
     {
         $output = $sut->adjustBrightness(-25);
@@ -550,32 +379,17 @@ final class ColorCIELabTest extends TestCase
     /**
      * @return array<int, array<int, \Coloreeze\ColorCIELab>>
      */
-    public function dataProviderForToDarker(): array
+    public static function dataProviderForToDarker(): array
     {
-        $sources = include __DIR__ . '/DataSources/CIELab.php';
+        $sources = include dirname(__DIR__, 1) . '/DataSources/CIELab.php';
 
         return $sources['toDarker'];
     }
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @covers \Coloreeze\Color::isInRange
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\ColorCIELab::__construct
-     * @covers \Coloreeze\ColorCIELab::adjustBrightness
-     * @covers \Coloreeze\ColorCIELab::toRGBA
-     * @covers \Coloreeze\ColorCIELab::toXYZ
-     * @covers \Coloreeze\ColorRGBA::__construct
-     * @covers \Coloreeze\ColorRGBA::adjustBrightness
-     * @covers \Coloreeze\ColorRGBA::toCIELab
-     * @covers \Coloreeze\ColorRGBA::toXYZ
-     * @covers \Coloreeze\ColorXYZ::__construct
-     * @covers \Coloreeze\ColorXYZ::toCIELab
-     * @covers \Coloreeze\ColorXYZ::toRGBA
-     *
-     * @dataProvider dataProviderForToLighter
-     */
+    #[Test]
+    #[DataProvider('dataProviderForToLighter')]
     public function testToLighter(ColorCIELab $sut, ColorCIELab $expectedOutput): void
     {
         $output = $sut->adjustBrightness(25);
@@ -587,9 +401,9 @@ final class ColorCIELabTest extends TestCase
     /**
      * @return array<int, array<int, \Coloreeze\ColorCIELab>>
      */
-    public function dataProviderForToLighter(): array
+    public static function dataProviderForToLighter(): array
     {
-        $sources = include __DIR__ . '/DataSources/CIELab.php';
+        $sources = include dirname(__DIR__, 1) . '/DataSources/CIELab.php';
 
         return $sources['toLighter'];
     }

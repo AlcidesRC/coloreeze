@@ -11,25 +11,26 @@ use Coloreeze\ColorInt;
 use Coloreeze\ColorRGBA;
 use Coloreeze\ColorXYZ;
 use Coloreeze\Exceptions\InvalidInput;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @internal
- *
- * @coversNothing
- */
+#[CoversClass(\Coloreeze\ColorCIELab::class)]
+#[CoversClass(\Coloreeze\ColorCMYK::class)]
+#[CoversClass(\Coloreeze\ColorHSB::class)]
+#[CoversClass(\Coloreeze\ColorHSL::class)]
+#[CoversClass(\Coloreeze\ColorHex::class)]
+#[CoversClass(\Coloreeze\ColorInt::class)]
+#[CoversClass(\Coloreeze\ColorRGBA::class)]
+#[CoversClass(\Coloreeze\ColorXYZ::class)]
+#[CoversClass(\Coloreeze\Exceptions\InvalidInput::class)]
 final class ColorHSBTest extends TestCase
 {
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\ColorHSB::__construct
-     * @covers \Coloreeze\Exceptions\InvalidInput::notInRange
-     * @covers \Coloreeze\Color::isInRange
-     *
-     * @dataProvider dataProviderForValidation
-     */
+    #[Test]
+    #[DataProvider('dataProviderForValidation')]
     public function testValidation(float $hue, int $saturation, int $brightness): void
     {
         static::expectException(InvalidInput::class);
@@ -40,7 +41,7 @@ final class ColorHSBTest extends TestCase
     /**
      * @return array<int, array<int, int>>
      */
-    public function dataProviderForValidation(): array
+    public static function dataProviderForValidation(): array
     {
         return [
             [ColorHSB::VALUE_MIN__HUE - 1, 0, 0],
@@ -54,16 +55,8 @@ final class ColorHSBTest extends TestCase
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @param array<int|float> $expectedValue
-     *
-     * @covers \Coloreeze\ColorHSB::__construct
-     * @covers \Coloreeze\ColorHSB::getValue
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\Color::isInRange
-     *
-     * @dataProvider dataProviderForEntity
-     */
+    #[Test]
+    #[DataProvider('dataProviderForEntity')]
     public function testEntity(float $hue, int $saturation, int $brightness, array $expectedValue): void
     {
         $sut = new ColorHSB($hue, $saturation, $brightness);
@@ -75,7 +68,7 @@ final class ColorHSBTest extends TestCase
     /**
      * @return array<int, array<int, array<int, float>|int>>
      */
-    public function dataProviderForEntity(): array
+    public static function dataProviderForEntity(): array
     {
         return [
             [0, 0, 0, [0.0000, 0.0000, 0.0000]],
@@ -90,18 +83,8 @@ final class ColorHSBTest extends TestCase
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @param array<int, array<int, array<int, float>|string>> $expectedValue
-     *
-     * @covers \Coloreeze\ColorHSB::__construct
-     * @covers \Coloreeze\ColorHSB::fromString
-     * @covers \Coloreeze\ColorHSB::getValue
-     * @covers \Coloreeze\Color::isInRange
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\Color::validateFormat
-     *
-     * @dataProvider dataProviderForFromString
-     */
+    #[Test]
+    #[DataProvider('dataProviderForFromString')]
     public function testFromString(string $inputValue, array $expectedValue): void
     {
         $sut = ColorHSB::fromString($inputValue);
@@ -113,7 +96,7 @@ final class ColorHSBTest extends TestCase
     /**
      * @return array<int, array<int, array<int, float>|string>>
      */
-    public function dataProviderForFromString(): array
+    public static function dataProviderForFromString(): array
     {
         return [
             ['hsb(0,0,0)', [0.0000, 0.0000, 0.0000]],
@@ -127,23 +110,8 @@ final class ColorHSBTest extends TestCase
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @covers \Coloreeze\Color::isInRange
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\ColorCIELab::__construct
-     * @covers \Coloreeze\ColorCIELab::__toString
-     * @covers \Coloreeze\ColorCIELab::distanceCIE76
-     * @covers \Coloreeze\ColorHSB::distanceCIE76
-     * @covers \Coloreeze\ColorHSB::toCIELab
-     * @covers \Coloreeze\ColorHSB::toRGBA
-     * @covers \Coloreeze\ColorHSB::toXYZ
-     * @covers \Coloreeze\ColorRGBA::__construct
-     * @covers \Coloreeze\ColorRGBA::toXYZ
-     * @covers \Coloreeze\ColorXYZ::__construct
-     * @covers \Coloreeze\ColorXYZ::toCIELab
-     *
-     * @dataProvider dataProviderForDistanceCIE76
-     */
+    #[Test]
+    #[DataProvider('dataProviderForDistanceCIE76')]
     public function testDistanceCIE76(ColorHSB $input1, ColorHSB $input2, float $expectedValue): void
     {
         $sut = $input1->distanceCIE76($input2);
@@ -154,7 +122,7 @@ final class ColorHSBTest extends TestCase
     /**
      * @return array<int, array<int, \Coloreeze\ColorHSB|float>>
      */
-    public function dataProviderForDistanceCIE76(): array
+    public static function dataProviderForDistanceCIE76(): array
     {
         return [
             [new ColorHSB(0, 0, 0), new ColorHSB(0, 0, 0), 0],
@@ -165,12 +133,8 @@ final class ColorHSBTest extends TestCase
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @covers \Coloreeze\ColorHSB::__construct
-     * @covers \Coloreeze\ColorHSB::__toString
-     *
-     * @dataProvider dataProviderForToString
-     */
+    #[Test]
+    #[DataProvider('dataProviderForToString')]
     public function testToString(ColorHSB $sut, string $expectedOutput): void
     {
         $output = (string) $sut;
@@ -181,28 +145,17 @@ final class ColorHSBTest extends TestCase
     /**
      * @return array<int, array<int, \Coloreeze\ColorHSB|string>>
      */
-    public function dataProviderForToString(): array
+    public static function dataProviderForToString(): array
     {
-        $sources = include __DIR__ . '/DataSources/HSB.php';
+        $sources = include dirname(__DIR__, 1) . '/DataSources/HSB.php';
 
         return $sources['toString'];
     }
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @covers \Coloreeze\ColorHex::__construct
-     * @covers \Coloreeze\ColorHSB::__construct
-     * @covers \Coloreeze\ColorHSB::toHex
-     * @covers \Coloreeze\ColorHSB::toRGBA
-     * @covers \Coloreeze\ColorRGBA::__construct
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\Color::isInRange
-     * @covers \Coloreeze\ColorRGBA::toHex
-     * @covers \Coloreeze\Color::validateFormat
-     *
-     * @dataProvider dataProviderForToHex
-     */
+    #[Test]
+    #[DataProvider('dataProviderForToHex')]
     public function testToHex(ColorHSB $sut, ColorHex $expectedOutput): void
     {
         $output = $sut->toHex();
@@ -214,32 +167,17 @@ final class ColorHSBTest extends TestCase
     /**
      * @return array<int, array<int, \Coloreeze\ColorHSB|\Coloreeze\ColorHex>>
      */
-    public function dataProviderForToHex(): array
+    public static function dataProviderForToHex(): array
     {
-        $sources = include __DIR__ . '/DataSources/HSB.php';
+        $sources = include dirname(__DIR__, 1) . '/DataSources/HSB.php';
 
         return $sources['toHex'];
     }
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @covers \Coloreeze\ColorHex::__construct
-     * @covers \Coloreeze\ColorHex::toInt
-     * @covers \Coloreeze\ColorHSB::__construct
-     * @covers \Coloreeze\ColorHSB::toHex
-     * @covers \Coloreeze\ColorHSB::toInt
-     * @covers \Coloreeze\ColorHSB::toRGBA
-     * @covers \Coloreeze\ColorInt::__construct
-     * @covers \Coloreeze\ColorRGBA::__construct
-     * @covers \Coloreeze\ColorRGBA::toInt
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\Color::isInRange
-     * @covers \Coloreeze\ColorRGBA::toHex
-     * @covers \Coloreeze\Color::validateFormat
-     *
-     * @dataProvider dataProviderForToInt
-     */
+    #[Test]
+    #[DataProvider('dataProviderForToInt')]
     public function testToInt(ColorHSB $sut, ColorInt $expectedOutput): void
     {
         $output = $sut->toInt();
@@ -251,24 +189,17 @@ final class ColorHSBTest extends TestCase
     /**
      * @return array<int, array<int, \Coloreeze\ColorHSB|\Coloreeze\ColorInt>>
      */
-    public function dataProviderForToInt(): array
+    public static function dataProviderForToInt(): array
     {
-        $sources = include __DIR__ . '/DataSources/HSB.php';
+        $sources = include dirname(__DIR__, 1) . '/DataSources/HSB.php';
 
         return $sources['toInt'];
     }
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @covers \Coloreeze\ColorHSB::__construct
-     * @covers \Coloreeze\ColorHSB::toRGBA
-     * @covers \Coloreeze\ColorRGBA::__construct
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\Color::isInRange
-     *
-     * @dataProvider dataProviderForToRGBA
-     */
+    #[Test]
+    #[DataProvider('dataProviderForToRGBA')]
     public function testToRGBA(ColorHSB $sut, ColorRGBA $expectedOutput): void
     {
         $output = $sut->toRGBA();
@@ -280,30 +211,17 @@ final class ColorHSBTest extends TestCase
     /**
      * @return array<int, array<int, \Coloreeze\ColorHSB|\Coloreeze\ColorRGBA>>
      */
-    public function dataProviderForToRGBA(): array
+    public static function dataProviderForToRGBA(): array
     {
-        $sources = include __DIR__ . '/DataSources/HSB.php';
+        $sources = include dirname(__DIR__, 1) . '/DataSources/HSB.php';
 
         return $sources['toRGBA'];
     }
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @covers \Coloreeze\Color::isInRange
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\ColorCMYK::__construct
-     * @covers \Coloreeze\ColorHex::__construct
-     * @covers \Coloreeze\ColorHex::toCMYK
-     * @covers \Coloreeze\ColorRGBA::__construct
-     * @covers \Coloreeze\ColorRGBA::toCMYK
-     * @covers \Coloreeze\ColorRGBA::toHex
-     * @covers \Coloreeze\ColorHSB::toCMYK
-     * @covers \Coloreeze\ColorHSB::toRGBA
-     * @covers \Coloreeze\Color::validateFormat
-     *
-     * @dataProvider dataProviderForToCMYK
-     */
+    #[Test]
+    #[DataProvider('dataProviderForToCMYK')]
     public function testToCMYK(ColorHSB $sut, ColorCMYK $expectedOutput): void
     {
         $output = $sut->toCMYK();
@@ -315,27 +233,17 @@ final class ColorHSBTest extends TestCase
     /**
      * @return array<int, array<int, \Coloreeze\ColorHSL|\Coloreeze\ColorCMYK>>
      */
-    public function dataProviderForToCMYK(): array
+    public static function dataProviderForToCMYK(): array
     {
-        $sources = include __DIR__ . '/DataSources/HSB.php';
+        $sources = include dirname(__DIR__, 1) . '/DataSources/HSB.php';
 
         return $sources['toCMYK'];
     }
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @covers \Coloreeze\Color::isInRange
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\ColorHSB::toHSL
-     * @covers \Coloreeze\ColorHSB::toRGBA
-     * @covers \Coloreeze\ColorHSL::__construct
-     * @covers \Coloreeze\ColorHSL::toHSL
-     * @covers \Coloreeze\ColorRGBA::__construct
-     * @covers \Coloreeze\ColorRGBA::toHSL
-     *
-     * @dataProvider dataProviderForToHSL
-     */
+    #[Test]
+    #[DataProvider('dataProviderForToHSL')]
     public function testToHSL(ColorHSB $sut, ColorHSL $expectedOutput): void
     {
         $output = $sut->toHSL();
@@ -347,27 +255,17 @@ final class ColorHSBTest extends TestCase
     /**
      * @return array<int, array<int, \Coloreeze\ColorHSL|\Coloreeze\ColorHSL>>
      */
-    public function dataProviderForToHSL(): array
+    public static function dataProviderForToHSL(): array
     {
-        $sources = include __DIR__ . '/DataSources/HSB.php';
+        $sources = include dirname(__DIR__, 1) . '/DataSources/HSB.php';
 
         return $sources['toHSL'];
     }
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\ColorHSB::__construct
-     * @covers \Coloreeze\ColorHSB::toRGBA
-     * @covers \Coloreeze\ColorHSB::toXYZ
-     * @covers \Coloreeze\ColorRGBA::__construct
-     * @covers \Coloreeze\ColorRGBA::toXYZ
-     * @covers \Coloreeze\ColorXYZ::__construct
-     * @covers \Coloreeze\Color::isInRange
-     *
-     * @dataProvider dataProviderForToXYZ
-     */
+    #[Test]
+    #[DataProvider('dataProviderForToXYZ')]
     public function testToXYZ(ColorHSB $sut, ColorXYZ $expectedOutput): void
     {
         $output = $sut->toXYZ();
@@ -379,23 +277,17 @@ final class ColorHSBTest extends TestCase
     /**
      * @return array<int, array<int, \Coloreeze\ColorHSL|\Coloreeze\ColorXYZ>>
      */
-    public function dataProviderForToXYZ(): array
+    public static function dataProviderForToXYZ(): array
     {
-        $sources = include __DIR__ . '/DataSources/HSB.php';
+        $sources = include dirname(__DIR__, 1) . '/DataSources/HSB.php';
 
         return $sources['toXYZ'];
     }
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @covers \Coloreeze\Color::isInRange
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\ColorHSB::__construct
-     * @covers \Coloreeze\ColorHSB::toHSB
-     *
-     * @dataProvider dataProviderForToHSB
-     */
+    #[Test]
+    #[DataProvider('dataProviderForToHSB')]
     public function testToHSB(ColorHSB $sut, ColorHSB $expectedOutput): void
     {
         $output = $sut->toHSB();
@@ -407,29 +299,17 @@ final class ColorHSBTest extends TestCase
     /**
      * @return array<int, array<int, \Coloreeze\ColorHSB|\Coloreeze\ColorHSB>>
      */
-    public function dataProviderForToHSB(): array
+    public static function dataProviderForToHSB(): array
     {
-        $sources = include __DIR__ . '/DataSources/HSB.php';
+        $sources = include dirname(__DIR__, 1) . '/DataSources/HSB.php';
 
         return $sources['toHSB'];
     }
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @covers \Coloreeze\Color::isInRange
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\ColorCIELab::__construct
-     * @covers \Coloreeze\ColorHSB::toCIELab
-     * @covers \Coloreeze\ColorHSB::toRGBA
-     * @covers \Coloreeze\ColorHSB::toXYZ
-     * @covers \Coloreeze\ColorRGBA::__construct
-     * @covers \Coloreeze\ColorRGBA::toXYZ
-     * @covers \Coloreeze\ColorXYZ::__construct
-     * @covers \Coloreeze\ColorXYZ::toCIELab
-     *
-     * @dataProvider dataProviderForToCIELab
-     */
+    #[Test]
+    #[DataProvider('dataProviderForToCIELab')]
     public function testToCIELab(ColorHSB $sut, ColorCIELab $expectedOutput): void
     {
         $output = $sut->toCIELab();
@@ -441,28 +321,17 @@ final class ColorHSBTest extends TestCase
     /**
      * @return array<int, array<int, \Coloreeze\ColorHSB|\Coloreeze\ColorCIELab>>
      */
-    public function dataProviderForToCIELab(): array
+    public static function dataProviderForToCIELab(): array
     {
-        $sources = include __DIR__ . '/DataSources/HSB.php';
+        $sources = include dirname(__DIR__, 1) . '/DataSources/HSB.php';
 
         return $sources['toCIELab'];
     }
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @covers \Coloreeze\Color::isInRange
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\ColorHSB::__construct
-     * @covers \Coloreeze\ColorHSB::toGreyscale
-     * @covers \Coloreeze\ColorHSB::toRGBA
-     * @covers \Coloreeze\ColorRGBA::__construct
-     * @covers \Coloreeze\ColorRGBA::toGreyscale
-     * @covers \Coloreeze\ColorRGBA::toHSB
-     * @covers \Coloreeze\ColorRGBA::toXYZ
-     *
-     * @dataProvider dataProviderForToGreyscale
-     */
+    #[Test]
+    #[DataProvider('dataProviderForToGreyscale')]
     public function testToGreyscale(ColorHSB $sut, ColorHSB $expectedOutput): void
     {
         $output = $sut->toGreyscale();
@@ -474,27 +343,17 @@ final class ColorHSBTest extends TestCase
     /**
      * @return array<int, array<int, \Coloreeze\ColorHSB>>
      */
-    public function dataProviderForToGreyscale(): array
+    public static function dataProviderForToGreyscale(): array
     {
-        $sources = include __DIR__ . '/DataSources/HSB.php';
+        $sources = include dirname(__DIR__, 1) . '/DataSources/HSB.php';
 
         return $sources['toGreyscale'];
     }
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @covers \Coloreeze\Color::isInRange
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\ColorHSB::__construct
-     * @covers \Coloreeze\ColorHSB::toComplementary
-     * @covers \Coloreeze\ColorHSB::toRGBA
-     * @covers \Coloreeze\ColorRGBA::__construct
-     * @covers \Coloreeze\ColorRGBA::toComplementary
-     * @covers \Coloreeze\ColorRGBA::toHSB
-     *
-     * @dataProvider dataProviderForToComplementary
-     */
+    #[Test]
+    #[DataProvider('dataProviderForToComplementary')]
     public function testToComplementary(ColorHSB $sut, ColorHSB $expectedOutput): void
     {
         $output = $sut->toComplementary();
@@ -506,27 +365,17 @@ final class ColorHSBTest extends TestCase
     /**
      * @return array<int, array<int, \Coloreeze\ColorHSB>>
      */
-    public function dataProviderForToComplementary(): array
+    public static function dataProviderForToComplementary(): array
     {
-        $sources = include __DIR__ . '/DataSources/HSB.php';
+        $sources = include dirname(__DIR__, 1) . '/DataSources/HSB.php';
 
         return $sources['toComplementary'];
     }
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @covers \Coloreeze\Color::isInRange
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\ColorHSB::__construct
-     * @covers \Coloreeze\ColorHSB::adjustBrightness
-     * @covers \Coloreeze\ColorHSB::toRGBA
-     * @covers \Coloreeze\ColorRGBA::__construct
-     * @covers \Coloreeze\ColorRGBA::adjustBrightness
-     * @covers \Coloreeze\ColorRGBA::toHSB
-     *
-     * @dataProvider dataProviderForToDarker
-     */
+    #[Test]
+    #[DataProvider('dataProviderForToDarker')]
     public function testToDarker(ColorHSB $sut, ColorHSB $expectedOutput): void
     {
         $output = $sut->adjustBrightness(-25);
@@ -538,27 +387,17 @@ final class ColorHSBTest extends TestCase
     /**
      * @return array<int, array<int, \Coloreeze\ColorHSB>>
      */
-    public function dataProviderForToDarker(): array
+    public static function dataProviderForToDarker(): array
     {
-        $sources = include __DIR__ . '/DataSources/HSB.php';
+        $sources = include dirname(__DIR__, 1) . '/DataSources/HSB.php';
 
         return $sources['toDarker'];
     }
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @covers \Coloreeze\Color::isInRange
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\ColorHSB::__construct
-     * @covers \Coloreeze\ColorHSB::adjustBrightness
-     * @covers \Coloreeze\ColorHSB::toRGBA
-     * @covers \Coloreeze\ColorRGBA::__construct
-     * @covers \Coloreeze\ColorRGBA::adjustBrightness
-     * @covers \Coloreeze\ColorRGBA::toHSB
-     *
-     * @dataProvider dataProviderForToLighter
-     */
+    #[Test]
+    #[DataProvider('dataProviderForToLighter')]
     public function testToLighter(ColorHSB $sut, ColorHSB $expectedOutput): void
     {
         $output = $sut->adjustBrightness(25);
@@ -570,9 +409,9 @@ final class ColorHSBTest extends TestCase
     /**
      * @return array<int, array<int, \Coloreeze\ColorHSB>>
      */
-    public function dataProviderForToLighter(): array
+    public static function dataProviderForToLighter(): array
     {
-        $sources = include __DIR__ . '/DataSources/HSB.php';
+        $sources = include dirname(__DIR__, 1) . '/DataSources/HSB.php';
 
         return $sources['toLighter'];
     }

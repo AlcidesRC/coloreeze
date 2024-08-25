@@ -1,43 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit
-    backupGlobals="false"
-    beStrictAboutCoversAnnotation="true"
-    beStrictAboutOutputDuringTests="true"
-    beStrictAboutTodoAnnotatedTests="true"
-    bootstrap="vendor/autoload.php"
-    cacheResult="false"
-    colors="true"
-    convertDeprecationsToExceptions="false"
-    executionOrder="random"
-    failOnRisky="true"
-    failOnWarning="true"
-    forceCoversAnnotation="true"
-    resolveDependencies="true"
-    verbose="true"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
->
-    <php>
-        <ini name="display_errors" value="1" />
-        <ini name="error_reporting" value="-1" />
-    </php>
-
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.1/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         cacheDirectory=".phpunit.cache"
+         executionOrder="depends,defects"
+         requireCoverageMetadata="true"
+         beStrictAboutCoverageMetadata="true"
+         beStrictAboutOutputDuringTests="true"
+         failOnRisky="true"
+         failOnWarning="true">
     <testsuites>
         <testsuite name="Unit Tests">
-            <directory>tests/Unit</directory>
+            <directory suffix=".php">tests/Unit</directory>
         </testsuite>
     </testsuites>
 
-    <coverage
-        disableCodeCoverageIgnore="true"
-        ignoreDeprecatedCodeUnits="true"
-        includeUncoveredFiles="true"
-        pathCoverage="false"
-        processUncoveredFiles="true"
-    >
+    <source ignoreIndirectDeprecations="true" restrictNotices="true" restrictWarnings="true">
         <include>
             <directory suffix=".php">src</directory>
-            <directory suffix=".php">tests</directory>
         </include>
+    </source>
+
+    <coverage includeUncoveredFiles="true"
+              pathCoverage="false"
+              ignoreDeprecatedCodeUnits="true"
+              disableCodeCoverageIgnore="true">
     </coverage>
 </phpunit>

@@ -12,37 +12,27 @@ use Coloreeze\ColorInt;
 use Coloreeze\ColorRGBA;
 use Coloreeze\ColorXYZ;
 use Coloreeze\Exceptions\InvalidInput;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @internal
- *
- * @coversNothing
- */
+#[CoversClass(\Coloreeze\ColorCIELab::class)]
+#[CoversClass(\Coloreeze\ColorCMYK::class)]
+#[CoversClass(\Coloreeze\ColorFactory::class)]
+#[CoversClass(\Coloreeze\ColorHSB::class)]
+#[CoversClass(\Coloreeze\ColorHSL::class)]
+#[CoversClass(\Coloreeze\ColorHex::class)]
+#[CoversClass(\Coloreeze\ColorInt::class)]
+#[CoversClass(\Coloreeze\ColorRGBA::class)]
+#[CoversClass(\Coloreeze\ColorXYZ::class)]
+#[CoversClass(\Coloreeze\Exceptions\InvalidInput::class)]
 final class ColorFactoryTest extends TestCase
 {
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @covers \Coloreeze\ColorFactory::fromString
-     * @covers \Coloreeze\Color::isInRange
-     * @covers \Coloreeze\Color::validateFormat
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\ColorCIELab::fromString
-     * @covers \Coloreeze\ColorCMYK::fromString
-     * @covers \Coloreeze\ColorHSB::fromString
-     * @covers \Coloreeze\ColorHSL::fromString
-     * @covers \Coloreeze\ColorHex::fromString
-     * @covers \Coloreeze\ColorInt::fromString
-     * @covers \Coloreeze\ColorRGBA::__construct
-     * @covers \Coloreeze\ColorRGBA::fromString
-     * @covers \Coloreeze\ColorXYZ::fromString
-     * @covers \Coloreeze\Exceptions\InvalidInput::notInRange
-     * @covers \Coloreeze\Exceptions\InvalidInput::notMatchingAnyColor
-     * @covers \Coloreeze\Exceptions\InvalidInput::wrongFormat
-     *
-     * @dataProvider dataProviderUnvalidInput
-     */
+    #[Test]
+    #[DataProvider('dataProviderUnvalidInput')]
     public function testWithUnvalidInput(string $input): void
     {
         static::expectException(InvalidInput::class);
@@ -53,7 +43,7 @@ final class ColorFactoryTest extends TestCase
     /**
      * @return array<int, array<int, string>>
      */
-    public function dataProviderUnvalidInput(): array
+    public static function dataProviderUnvalidInput(): array
     {
         return [
             [''],
@@ -64,31 +54,8 @@ final class ColorFactoryTest extends TestCase
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    /**
-     * @covers \Coloreeze\Color::isInRange
-     * @covers \Coloreeze\Color::validateFormat
-     * @covers \Coloreeze\Color::validateIsInRange
-     * @covers \Coloreeze\ColorCIELab::__construct
-     * @covers \Coloreeze\ColorCIELab::fromString
-     * @covers \Coloreeze\ColorCMYK::__construct
-     * @covers \Coloreeze\ColorCMYK::fromString
-     * @covers \Coloreeze\ColorFactory::fromString
-     * @covers \Coloreeze\ColorHex::__construct
-     * @covers \Coloreeze\ColorHex::fromString
-     * @covers \Coloreeze\ColorHSB::__construct
-     * @covers \Coloreeze\ColorHSB::fromString
-     * @covers \Coloreeze\ColorHSL::__construct
-     * @covers \Coloreeze\ColorHSL::fromString
-     * @covers \Coloreeze\ColorInt::__construct
-     * @covers \Coloreeze\ColorInt::fromString
-     * @covers \Coloreeze\ColorRGBA::__construct
-     * @covers \Coloreeze\ColorRGBA::fromString
-     * @covers \Coloreeze\ColorXYZ::__construct
-     * @covers \Coloreeze\ColorXYZ::fromString
-     * @covers \Coloreeze\Exceptions\InvalidInput::wrongFormat
-     *
-     * @dataProvider dataProviderValidInput
-     */
+    #[Test]
+    #[DataProvider('dataProviderValidInput')]
     public function testWithValidInput(string $input, string $expectedClass): void
     {
         $sut = ColorFactory::fromString($input);
@@ -99,7 +66,7 @@ final class ColorFactoryTest extends TestCase
     /**
      * @return array<int, array<int, string>>
      */
-    public function dataProviderValidInput(): array
+    public static function dataProviderValidInput(): array
     {
         return [
             ['cielab(0,0,0)', ColorCIELab::class],
