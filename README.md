@@ -1,3 +1,5 @@
+[![Integration Tests](https://github.com/AlcidesRC/coloreeze/actions/workflows/ci.yml/badge.svg)](https://github.com/AlcidesRC/coloreeze/actions/workflows/ci.yml)
+
 # coloreeze
 
 > A PHP library to deal with color conversions
