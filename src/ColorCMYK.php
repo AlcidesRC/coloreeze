@@ -78,6 +78,10 @@ final class ColorCMYK extends Color implements ColorInterface
 
         preg_match(self::MAP_REGEXP[self::class], $value, $matches);
 
+        if (count($matches) !== 4) {
+            return new static(0, 0, 0, 0);
+        }
+
         return new static((float) $matches[1], (float) $matches[2], (float) $matches[3], (float) $matches[4]);
     }
 

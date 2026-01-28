@@ -63,6 +63,10 @@ final class ColorHex extends Color implements ColorInterface
 
         preg_match(self::MAP_REGEXP[self::class], $value, $matches);
 
+        if (count($matches) !== 1) {
+            return new static('#000000');
+        }
+
         return new static((string) $matches[1]);
     }
 

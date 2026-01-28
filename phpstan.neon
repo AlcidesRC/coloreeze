@@ -2,7 +2,3 @@ parameters:
     level: 9
     paths:
         - src
-        - tests
-    ignoreErrors:
-        - '#Method [a-zA-Z0-9\\_]+::testEntity\(\) has parameter \$expectedValue with no value type specified in iterable type array.#'
-        - '#Method [a-zA-Z0-9\\_]+::testFromString\(\) has parameter \$expectedValue with no value type specified in iterable type array.#'

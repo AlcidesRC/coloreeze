@@ -82,6 +82,10 @@ final class ColorRGBA extends Color implements ColorInterface
 
         preg_match(self::MAP_REGEXP[self::class], $value, $matches);
 
+        if (count($matches) !== 4) {
+            return new static(0, 0, 0, 1);
+        }
+
         return new static((int) $matches[1], (int) $matches[2], (int) $matches[3], (float) ($matches[4] ?? 1));
     }
 

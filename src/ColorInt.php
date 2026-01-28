@@ -46,6 +46,10 @@ final class ColorInt extends Color implements ColorInterface
 
         preg_match(self::MAP_REGEXP[self::class], $value, $matches);
 
+        if (count($matches) !== 1) {
+            return new static(0);
+        }
+
         return new static((int) $matches[1]);
     }
 

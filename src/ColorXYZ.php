@@ -67,6 +67,10 @@ final class ColorXYZ extends Color implements ColorInterface
 
         preg_match(self::MAP_REGEXP[self::class], $value, $matches);
 
+        if (count($matches) !== 3) {
+            return new static(0, 0, 0);
+        }
+
         return new static((float) $matches[1], (float) $matches[2], (float) $matches[3]);
     }
 
