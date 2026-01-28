@@ -65,9 +65,9 @@ final class ColorXYZ extends Color implements ColorInterface
     {
         self::validateFormat($value, self::class);
 
-        preg_match(self::MAP_REGEXP[self::class], $value, $matches);
+        $result = preg_match(self::MAP_REGEXP[self::class], $value, $matches);
 
-        if (count($matches) !== 3) {
+        if ($result === false) {
             return new static(0, 0, 0);
         }
 

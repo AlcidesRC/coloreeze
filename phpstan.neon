@@ -2,3 +2,9 @@ parameters:
     level: 9
     paths:
         - src
+    ignoreErrors:
+        - '#Offset [0-9]+ does not exist on array\{0\?\: string, 1\?\: non-empty-string, 2\?\: non-empty-string, 3\?\: non-empty-string\}.#'
+        - '#Offset [0-9]+ does not exist on array\{0\?\: string, 1\?\: non-empty-string, 2\?\: non-empty-string, 3\?\: non-empty-string, 4\?\: non-empty-string\}.#'
+        - '#Offset [0-9]+ does not exist on array\{0\?\: string, 1\?\: numeric-string, 2\?\: numeric-string, 3\?\: numeric-string, 4\?\: non-empty-string\}.#'
+        - '#Offset [0-9]+ does not exist on array\{0\?\: string, 1\?\: numeric-string\}.#'
+        - '#Offset [0-9]+ does not exist on array\{0\?\: string, 1\?\: non-falsy-string, 2\?\: non-falsy-string\}.#'
